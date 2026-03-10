@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container py-120">
+
+    <h2>{{ administration.title }}</h2>
+    <p>{{ administration.description }}</p>
+
+    {% if administration.image %}
+        <img src="{{ administration.image.url }}" class="img-fluid mb-4">
+    {% endif %}
+
+    {% if administration.pdf %}
+        <a href="{{ administration.pdf.url }}" target="_blank" class="theme-btn">
+            Download PDF
+        </a>
+    {% endif %}
+
+</section>
+{% endblock %}
+
+
+

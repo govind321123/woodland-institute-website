@@ -1,0 +1,127 @@
+{% extends 'details.html' %}
+
+{% block title %}
+{{ singlecourse.full_name|default:singlecourse.heads }}
+{% endblock %}
+
+{% block menus %}
+{{ singlecourse.full_name|default:singlecourse.heads }}
+{% endblock %}
+
+{% block module %}
+Courses
+{% endblock %}
+
+{% block activemenus %}
+{{ singlecourse.full_name|default:singlecourse.heads }}
+{% endblock %}
+
+{% block contents %}
+
+<div class="course-single-area py-120">
+    <div class="container">
+        <div class="course-single-wrapper">
+            <div class="row">
+
+                <!-- LEFT CONTENT -->
+                <div class="col-xl-8 col-lg-8">
+                    <div class="course-details">
+
+                        <!-- Main Image -->
+                        {% if singlecourse.main_image %}
+                        <div class="course-details-img mb-30">
+                            <img src="{{ singlecourse.main_image.url }}" 
+                                 class="img-fluid rounded"
+                                 alt="{{ singlecourse.heads }}">
+                        </div>
+                        {% endif %}
+
+                        <!-- Course Title -->
+                        <h3 class="mb-20">
+                            {{ singlecourse.full_name|default:singlecourse.heads }}
+                        </h3>
+
+                        <!-- DESCRIPTION WITH IMAGE IN BETWEEN -->
+                        <div class="course-description">
+
+                            {{ first_part|safe }}
+
+                            {% if singlecourse.highlight_image_1 or singlecourse.highlight_image_2 %}
+                            <div class="row my-4">
+
+                                {% if singlecourse.highlight_image_1 %}
+                                <div class="col-md-6 mb-3">
+                                    <img src="{{ singlecourse.highlight_image_1.url }}"
+                                         class="img-fluid rounded shadow-sm"
+                                         alt="Highlight Image 1">
+                                </div>
+                                {% endif %}
+
+                                {% if singlecourse.highlight_image_2 %}
+                                <div class="col-md-6 mb-3">
+                                    <img src="{{ singlecourse.highlight_image_2.url }}"
+                                         class="img-fluid rounded shadow-sm"
+                                         alt="Highlight Image 2">
+                                </div>
+                                {% endif %}
+
+                            </div>
+                            {% endif %}
+
+                            {{ second_part|safe }}
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDEBAR -->
+                <div class="col-xl-4 col-lg-4">
+                    <div class="course-single-sidebar">
+
+                        <div class="widget">
+                            <h4 class="widget-title">Course Info</h4>
+
+                            <div class="course-single-info">
+
+                                <div class="single-info">
+                                    <i class="far fa-bolt"></i>
+                                    <div class="single-info-content">
+                                        <h4>Category</h4>
+                                        <span>{{ singlecourse.type.heads }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="single-info">
+                                    <i class="far fa-users"></i>
+                                    <div class="single-info-content">
+                                        <h4>Total Seats</h4>
+                                        <span>{{ singlecourse.total_seats }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="single-info">
+                                    <i class="far fa-clock"></i>
+                                    <div class="single-info-content">
+                                        <h4>Duration</h4>
+                                        <span>{{ singlecourse.no_of_years }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <a href="{% url 'apply_now' %}" class="theme-btn">
+                                Apply Now
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

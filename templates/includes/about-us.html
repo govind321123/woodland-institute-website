@@ -1,0 +1,69 @@
+{% load static %}
+
+<div class="about-area pt-120 pb-120">
+    <div class="container-fluid px-5">
+
+        <div class="about-grid">
+
+            <!-- LEFT: CONTENT -->
+            <div class="about-content-col">
+
+                <div class="site-heading mb-3">
+                    <span class="site-title-tagline">
+                        <i class="far fa-book-open-reader"></i> About Us
+                    </span>
+                    <h2 class="site-title">
+                        Woodland Nursing Institute <span>Inspires</span> Excellence.
+                    </h2>
+                </div>
+
+                <!-- TEXT WRAPPER -->
+                <div id="aboutContentWrapper">
+                    {{ aboutus.excerpt|safe }}
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="about-bottom mt-4">
+
+                    <a href="{% url 'training' %}" class="theme-btn">
+                        Discover More <i class="fas fa-arrow-right-long"></i>
+                    </a>
+
+                    <button id="aboutReadBtn" class="theme-btn ms-2" type="button">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+
+                </div>
+
+            </div> <!-- ✅ CLOSE CONTENT COLUMN -->
+
+            <!-- RIGHT: IMAGES -->
+            <div class="about-image-col">
+
+                <div class="about-img popup-gallery">
+
+                    <div class="img-block img-1">
+                        <a href="{% static 'img/course/aa.jpg' %}" class="popup-img">
+                            <img src="{% static 'img/course/aa.jpg' %}" alt="">
+                        </a>
+                    </div>
+
+                    <div class="img-block img-2">
+                        <a href="{% static 'img/course/college.jpeg' %}" class="popup-img">
+                            <img src="{% static 'img/course/college.jpeg' %}" alt="">
+                        </a>
+                    </div>
+
+                    <div class="img-block img-3">
+                        <a href="{% static 'img/course/hostel.jpeg' %}" class="popup-img">
+                            <img src="{% static 'img/course/hostel.jpeg' %}" alt="">
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{% extends "details.html" %}
+{% load static %}
+
+{% block breadcrumb_image %}
+{% static 'img/breadcrumb/library.jpg' %}
+{% endblock %}
+
+{% block menus %}Library{% endblock %}
+{% block module %}Facilities{% endblock %}
+{% block activemenus %}Library{% endblock %}
+
+{% block contents %}
+    {{ facility.details|safe }}
+{% endblock %}

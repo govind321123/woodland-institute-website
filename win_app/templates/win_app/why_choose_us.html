@@ -1,0 +1,19 @@
+{% extends "details.html" %}
+{% load static %}
+
+{% block menus %}Why Choose Us{% endblock %}
+{% block module %}About{% endblock %}
+{% block activemenus %}Why Choose Us{% endblock %}
+
+{% block contents %}
+<section class="why-choose-us">
+    <div class="container">
+        {% if why %}
+            {{ why.content|safe }}
+        {% else %}
+            <p>No content added yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+

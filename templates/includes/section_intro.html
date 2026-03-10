@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="section-intro py-40">
+    <div class="container">
+        <div class="text-center">
+
+            <!-- Small logo + welcome text -->
+            <div class="d-flex justify-content-center align-items-center mb-10">
+                <img src="{% static 'img/logo/favicon.png' %}"
+                     alt="logo"
+                     style="width:36px; margin-right:10px;">
+                <span class="site-title-tagline">
+                    WELCOME TO WOODLAND INSTITUTE OF NURSING
+                </span>
+            </div>
+
+            <!-- Horizontal line -->
+            <div style="width:90px; height:3px; background:#1a76d2; margin:15px auto;"></div>
+
+            <!-- Big heading -->
+            <h2 class="site-title mt-15">
+                {{ section_heading|default:"Start Your Beautiful And Bright Future" }}
+            </h2>
+
+        </div>
+    </div>
+</div>

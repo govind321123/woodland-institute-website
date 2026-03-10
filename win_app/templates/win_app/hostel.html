@@ -1,0 +1,15 @@
+<!--Creating a new file for different background Images for breadcrumb-->
+{% extends "details.html" %}
+{% load static %}
+
+{% block breadcrumb_image %}
+{% static 'img/breadcrumb/hostel.jpg' %}
+{% endblock %}
+
+{% block menus %}Hostel{% endblock %}
+{% block module %}Facilities{% endblock %}
+{% block activemenus %}Hostel{% endblock %}
+
+{% block contents %}
+    {{ facility.details|safe }}
+{% endblock %}

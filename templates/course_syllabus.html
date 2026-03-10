@@ -1,0 +1,48 @@
+{% extends "details.html" %}
+{% load static %}
+
+{% block title %}
+{{ course.heads }} - Program Structure
+{% endblock %}
+
+{% block menus %}
+{{ course.heads }} - Program Structure
+{% endblock %}
+
+{% block module %}
+Courses
+{% endblock %}
+
+{% block activemenus %}
+Program Structure
+{% endblock %}
+
+{% block contents %}
+
+<div class="container mt-5 mb-5">
+    
+    <div class="card shadow-sm">
+        
+        <div class="card-header bg-success text-white text-center">
+            <h4 class="mb-0">
+                {{ course.heads }} - Program Structure
+            </h4>
+        </div>
+
+        <div class="card-body">
+            
+            {% if syllabus %}
+                <div class="syllabus-content">
+                    {{ syllabus.content|safe }}
+                </div>
+            {% else %}
+                <p class="text-center">No syllabus available yet.</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

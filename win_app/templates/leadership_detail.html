@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Leadership Detail Section -->
+<div class="container py-5">
+
+    <div class="row align-items-start">
+
+        <!-- LEFT IMAGE -->
+        <div class="col-md-4">
+            <img src="{{ leader.photo.url }}" 
+                 class="img-fluid rounded shadow-sm"
+                 style="max-height:400px; object-fit:cover;">
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="col-md-8">
+
+            <h2 class="mb-2">{{ leader.name }}</h2>
+            <p class="text-muted mb-3">
+                <strong>{{ leader.designation }}</strong>
+            </p>
+
+            <p style="text-align: justify;">
+                {{ leader.message }}
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+<!-- Seocnd one<div class="container py-5">
+
+    <div class="row align-items-start">
+
+        <div class="col-md-4 text-center">
+            <img src="{{ leader.photo.url }}"
+                 class="img-fluid rounded shadow"
+                 style="max-height: 400px; object-fit: cover;">
+        </div>
+
+        <div class="col-md-8">
+            <h3>{{ leader.name }}</h3>
+            <p class="text-muted">{{ leader.designation }}</p>
+            <p>{{ leader.message }}</p>
+        </div>
+
+    </div>
+
+</div>-->
+
+
+<!--Original<div class="container py-5">
+
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ leader.photo.url }}" class="img-fluid rounded">
+        </div>
+
+        <div class="col-md-8">
+            <h3>{{ leader.name }}</h3>
+            <p class="text-muted">{{ leader.designation }}</p>
+            <p>{{ leader.message }}</p>
+        </div>
+    </div>
+
+</div>-->
+

@@ -1,0 +1,246 @@
+{% load static %}
+
+<div class="main-navigation">
+    <nav class="navbar navbar-expand-lg">
+        <!--<div class="container position-relative">-->
+        <div class="container-fluid ps-1 pe-4 position-relative">
+            
+
+            <!-- ================= LOGO + NAME ================= -->
+            <a class="navbar-brand brand-wrapper" href="{% url 'home' %}">
+                
+                <!-- Logo -->
+                <img src="{% static 'img/course/logoo.png' %}" 
+                     alt="Woodland Logo" 
+                     class="main-logo">
+
+                <!-- Institute Name -->
+                <div class="brand-text">
+                    <div class="brand-line1">
+                        WOODLAND INSTITUTE
+                    </div>
+                    <div class="brand-line2">
+                            OF NURSING
+                    </div>
+                </div>
+            </a>
+            <!-- ================================================= -->
+
+
+            <!-- Mobile Right Section -->
+            <div class="mobile-menu-right">
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#main_nav">
+                    <i class="far fa-bars"></i>
+                </button>
+            </div>
+
+
+            <!-- ================= MENU ITEMS ================= -->
+            <div class="collapse navbar-collapse" id="main_nav">
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- Home -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+
+                    <!-- Courses Dropdown -->
+                    <!--original <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Courses</a>
+                        <ul class="dropdown-menu fade-down wide-dropdown">
+
+                            {% for course in courses %}
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'courses' course.slug %}">
+                                        {{ course.heads }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>-->
+                    <!--This one is for checks-->
+                                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">
+                        Courses
+                    </a>
+
+                    <ul class="dropdown-menu fade-down wide-dropdown">
+
+                        <!-- Main Courses -->
+                        {% for course in courses %}
+                            <li>
+                                <a class="dropdown-item"
+                                href="{% url 'courses' course.slug %}">
+                                    {{ course.heads }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <!-- Course Syllabus Section -->
+                        <li>
+                            <!--<a class="dropdown-item disabled fw-bold">-->
+                            <a class="dropdown-item disabled syllabus-title">
+                                Course Syllabus
+                            </a>
+                        </li>
+
+                        {% for course in courses %}
+                            {% if course.syllabus %}
+                                <li>
+                                    <a class="dropdown-item"
+                                    href="{% url 'course_syllabus' course.slug %}">
+                                        {{ course.heads }} Syllabus
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                    </ul>
+                </li>
+
+
+	<!-- Administration -->
+                   <!-- Administration Dropdown -->
+<!-- Administration Dropdown -->
+                        <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'administration' %}">
+                            Administration
+                        </a>
+                    </li>
+
+
+
+                       <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active"
+                            href="{% url 'administration' %}"
+                            data-bs-toggle="dropdown">
+                                Administration
+                            </a>
+
+                            <ul class="dropdown-menu fade-down">
+                                {% for admin in administrations %}
+                                    <li>
+                                        <a class="dropdown-item"
+                                        href="{% url 'administration_detail' admin.slug %}">
+                                            {{ admin.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>-->
+
+
+
+                    <!-- Facilities -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           data-bs-toggle="dropdown">
+                           Facilities
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            {% for facility in facilities %}
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'facilities' facility.slug %}">
+                                        {{ facility.heads }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    <!-- Gallery -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           data-bs-toggle="dropdown">
+                           Gallery
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            {% for g in galleries %}
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'gallery' g.slug %}">
+                                        {{ g.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+                    <!-- Events -->
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{% url 'events' %}">
+                           Events
+                        </a>
+                    </li>
+
+                    <!-- Announcements -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {% if 'announcements' in request.path %}active{% endif %}"
+                            href="#"
+                            data-bs-toggle="dropdown">
+                            Announcements
+                            </a>
+
+                        <ul class="dropdown-menu">
+                            {% for cat in announcement_categories %}
+                                <li>
+                                    <a class="dropdown-item {% if cat.slug in request.path %}active{% endif %}"
+                                    href="{% url 'announcement_category' cat.slug %}">
+                                        {{ cat.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <!--<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           data-bs-toggle="dropdown">
+                           Announcements
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            {% for cat in announcement_categories %}
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'announcement_category' cat.slug %}">
+                                        {{ cat.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>-->
+
+                    <!-- Contact -->
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{% url 'contact' %}">
+                           Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Apply Button -->
+                <div class="nav-right-btn ms-3">
+                    <a href="{% url 'apply_now' %}" class="theme-btn">
+                        Apply Now
+                    </a>
+                </div>
+
+            </div>
+            <!-- ================================================= -->
+
+        </div>
+    </nav>
+</div>

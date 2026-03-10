@@ -1,0 +1,194 @@
+{% extends 'details.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block menus %}
+    CONTACT US
+{% endblock %}
+
+{% block module %}
+    Menus
+{% endblock %}
+
+{% block activemenus %}
+    Contact
+{% endblock %}
+
+{% block contents %}
+
+<!-- =========================
+     CONTACT AREA
+========================= -->
+<div class="contact-area py-120">
+    <div class="container">
+
+        <!-- CONTACT INFO BOXES -->
+        <div class="contact-content mb-5">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="contact-info">
+                        <div class="contact-info-icon">
+                            <i class="fal fa-map-location-dot"></i>
+                        </div>
+                        <div class="contact-info-content">
+                            <h5>Office Address</h5>
+                            <p>{{ organization.address_name }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="contact-info">
+                        <div class="contact-info-icon">
+                            <i class="fal fa-phone-volume"></i>
+                        </div>
+                        <div class="contact-info-content">
+                            <h5>Call Us</h5>
+                            <p>{{ organization.contact_no }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="contact-info">
+                        <div class="contact-info-icon">
+                            <i class="fal fa-envelopes"></i>
+                        </div>
+                        <div class="contact-info-content">
+                            <h5>Email Us</h5>
+                            <p>{{ organization.email_id }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="contact-info">
+                        <div class="contact-info-icon">
+                            <i class="fal fa-alarm-clock"></i>
+                        </div>
+                        <div class="contact-info-content">
+                            <h5>Open Time</h5>
+                            <p>Mon - Sat (10.00AM - 05.30PM)</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CONTACT IMAGE + FORM -->
+        <div class="contact-wrapper">
+            <div class="row">
+
+                <!-- LEFT IMAGE (ADMIN CONTROLLED) -->
+                <div class="col-lg-5">
+                    <div class="contact-img" style="height:450px; overflow:hidden; border-radius:12px;">
+
+                        {% if contact_page and contact_page.image %}
+                            <img src="{{ contact_page.image.url }}"
+                                 alt="Contact Image"
+                                 style="width:100%; height:100%; object-fit:cover;">
+                        {% else %}
+                            <img src="{% static 'img/contact/contact.png' %}"
+                                 alt="Contact Image"
+                                 style="width:100%; height:100%; object-fit:cover;">
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <!-- RIGHT FORM -->
+                <div class="col-lg-7 align-self-center">
+                    <div class="contact-form">
+
+                        <div class="contact-form-header mb-4">
+
+                            {% if contact_page.title %}
+                                <h2>{{ contact_page.title }}</h2>
+                            {% else %}
+                                <h2>Get In Touch</h2>
+                            {% endif %}
+
+                            {% if contact_page.description %}
+                                <p>{{ contact_page.description }}</p>
+                            {% else %}
+                                <p>
+                                    Kindly send us the mail to get in touch with us.
+                                    Our representative will get back to you!
+                                </p>
+                            {% endif %}
+
+                        </div>
+
+                        <form method="post" action="{% url 'email' %}" id="contact-form">
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="name"
+                                               placeholder="Your Name"
+                                               required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="email"
+                                               class="form-control"
+                                               name="email"
+                                               placeholder="Your Email"
+                                               required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text"
+                                       class="form-control"
+                                       name="subject"
+                                       placeholder="Your Subject"
+                                       required>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="message"
+                                          rows="5"
+                                          class="form-control"
+                                          placeholder="Write Your Message"></textarea>
+                            </div>
+
+                            <button type="submit" class="theme-btn">
+                                Send Message <i class="far fa-paper-plane"></i>
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- END CONTACT AREA -->
+
+<!-- =========================
+     GOOGLE MAP
+========================= -->
+<div class="contact-map">
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14399.213264547889!2d91.88717107645643!3d25.5449276893531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37507c233701515f%3A0xe6854042a1886f36!2sWoodland%20Institute%20of%20Nursing!5e0!3m2!1sen!2sin!4v1756379145426!5m2!1sen!2sin"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
+{% endblock %}

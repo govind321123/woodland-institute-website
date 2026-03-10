@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applications List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #f2f2f2;
+        }
+        img {
+            width: 60px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Applications</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Program</th>
+            <th>Degree</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Photo</th>
+            <th>Document</th>
+            <th>Submitted</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in applications %}
+        <tr>
+            <td>{{ app.first_name }} {{ app.last_name }}</td>
+            <td>{{ app.program }}</td>
+            <td>{{ app.degree }}</td>
+            <td>{{ app.email }}</td>
+            <td>{{ app.contact_number }}</td>
+            <td>
+                {% if app.photo %}
+                    <img src="{{ app.photo.url }}">
+                {% endif %}
+            </td>
+            <td>
+                {% if app.document %}
+                    <a href="{{ app.document.url }}" target="_blank">View</a>
+                {% endif %}
+            </td>
+            <td>{{ app.submitted_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8">No applications found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

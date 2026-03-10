@@ -1,0 +1,59 @@
+<!--{% extends "admin_base.html" %}
+
+{% load static %}
+
+{% block title %}Administration{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">OUR FACULTY</h2>
+
+<div class="row">
+    {% for admin in administrations %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+
+            {% if admin.photo %}
+            <div class="admin-img-wrapper">
+                <img src="{{ admin.photo.url }}" class="card-img-top" alt="{{ admin.name }}">
+            </div>
+            {% endif %}
+
+            <div class="card-body">
+                <h5 class="card-title">{{ admin.name }}</h5>
+
+                <p>
+                    <strong>Designation:</strong> {{ admin.designation.name }}<br>
+                    <strong>Department:</strong> {{ admin.department.name }}
+                </p>
+
+                {% if admin.details %}
+                    <div class="mt-2">{{ admin.details|safe }}</div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    {% empty %}
+        <p>No administration staff added yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}-->
+
+event_list.html
+<!--{% extends 'details.html' %}
+
+{% block contents %}
+
+<h1>{{ event.title }}</h1>
+
+<p>
+    <strong>Date:</strong> {{ event.date|date:"M d, Y" }}
+</p>
+
+<div>
+    {{ event.details|safe }}
+</div>
+
+{% endblock %}-->

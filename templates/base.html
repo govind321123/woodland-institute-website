@@ -1,0 +1,1110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- title -->
+    <title>{% block title %} Woodland Institute of Nursing {% endblock %}</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/logo/favicon.png' %}">
+
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all-fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+</head>
+
+
+
+
+    <!-- header area -->
+    <header class="header">
+        <!-- header top -->
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-wrap">
+                    <div class="header-top-left">
+                       <div class="header-top-social">
+                            <span>Chat With Us :</span>
+                            <a href="https://wa.me/918257081608" target="_blank" class="whatsapp-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-top-right">
+                        <div class="header-top-contact">
+                            <ul>
+                                {% if organization %}
+                                <li>
+                                    <a href="#"><i class="far fa-location-dot"></i> {{ organization.address_name }} </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:info@example.com"><i class="far fa-envelopes"></i> {{ organization.email_id }}</a>
+                                </li>
+                                <li>
+                                    <a href="tel:+21236547898"><i class="far fa-phone-volume"></i> {{ organization.contact_no }}</a>
+                                </li>
+                                {% endif %}
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include "includes/menus.html" %}
+
+    </header>
+    <!-- header area end -->
+
+
+    <!-- popup search -->
+    <div class="search-popup">
+        <button class="close-search"><span class="far fa-times"></span></button>
+        <form action="{% url 'apply_now' %}" method="get">
+            <div class="form-group">
+                <input type="search" name="search-field" placeholder="Search Here..." required>
+                <button type="submit"><i class="far fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!-- popup search end -->
+
+
+<main class="main">
+
+    {% if section_heading %}
+        {% include "includes/section_intro.html" %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+{% if not hide_home_sections %}
+
+
+
+
+ <!-- ===============================
+     MESSAGE FROM THE DIRECTOR
+================================ -->
+{% include 'includes/director.html' %}
+<!--Director section Ends-->
+
+ <!--WHY CHOOSE US-->
+ <!-- WHY CHOOSE US -->
+<div class="choose-area">
+  <div class="container-fluid px-5">
+
+    <!-- IMAGE -->
+    <div class="choose-image">
+      <img src="{% static 'img/course/Principal.JPG' %}" alt="Principal">
+    </div>
+
+    <!-- HEADING -->
+    <div class="choose-heading">
+      <span class="choose-tag">WHY CHOOSE US</span>
+      <h2>
+        Why Choose <span>Woodland Nursing Institute</span>
+      </h2>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="choose-content">
+
+      <!-- Visible Content (3 Paragraphs Visible) -->
+      <p>
+        Choosing the right nursing college can shape your career in health care —
+        and Woodland Institute of Nursing stands out as a strong choice for aspiring
+        nurses who want a solid foundation in both theory and practice.
+      </p>
+
+      <p>
+        <strong>1. Established Legacy and Commitment</strong><br>
+        Woodland Institute of Nursing was established in 2006 with the mission to develop
+        skilled nursing professionals who can meet the growing healthcare needs of the country.
+        The institute focuses on producing leaders not only in clinical settings but also in
+        academic and administrative roles, preparing students to take on diverse responsibilities
+        in the healthcare sector.
+      </p>
+
+      <p>
+        <strong>2. Comprehensive Accredited Programs</strong><br>
+        The institute offers nursing courses recognized by the Indian Nursing Council.
+      </p>
+
+      <!-- Hidden Content -->
+      <div id="chooseMoreContent" style="display: none;">
+
+        <ul>
+          <li>
+            General Nursing and Midwifery (GNM) – a foundational 3-year diploma for hands-on nursing practice.
+          </li>
+          <li>
+            Basic B.Sc. Nursing – a 4-year degree that builds deep competence in advanced nursing care.
+          </li>
+          <li>
+            Post Basic B.Sc. Nursing – caters to working nurses who want to further their skills and qualifications.
+          </li>
+        </ul>
+
+        <p>
+          All programs combine scientific knowledge with practical clinical experience, preparing students
+          to provide high-quality care in hospitals and community settings.
+        </p>
+
+        <p>
+          <strong>3. Strong Academic Foundations</strong><br>
+          The curriculum is built on a robust theoretical base, integrated with real-world clinical training.
+          Students learn not just nursing techniques, but also critical thinking, communication skills, ethics,
+          leadership, and community health — all essential for modern nursing professionals.
+        </p>
+
+        <p>
+          <strong>4. Experienced Faculty and Supportive Environment</strong><br>
+          The institute is staffed by qualified and dedicated nursing educators who guide students through their
+          studies and clinical practice. This mentorship fosters both professional confidence and personal growth,
+          helping students become compassionate caregivers and effective health team members.
+        </p>
+
+        <p>
+          <strong>5. Peaceful, Enriching Campus Setting</strong><br>
+          Located in Laitkor, Shillong, the campus offers a serene and green environment — perfect for focused
+          study and personal well-being. Surrounded by hills, fresh air, and natural beauty, students benefit
+          from a peaceful atmosphere alongside a strong academic culture.
+        </p>
+
+        <p>
+          <strong>6. Preparation for Real-World Nursing Careers</strong><br>
+          With clinical exposure in healthcare settings and an emphasis on hands-on training, Woodland prepares
+          graduates to enter the workforce confidently. Whether locally or globally, alumni are equipped with
+          the skills to make meaningful contributions to patient care and public health.
+        </p>
+
+      </div>
+
+      <!-- Button -->
+      <button id="chooseReadBtn" class="theme-btn mt-3" type="button">
+        Read More <i class="fas fa-chevron-down"></i>
+      </button>
+
+    </div>
+
+    <div class="choose-clear"></div>
+
+  </div>
+</div>
+
+
+        <!-- about area -->
+     {% include 'includes/about-us.html' %}
+        <!-- about area end -->
+
+
+<!-- Counter Area -->
+<div class="counter-area">
+    <div class="container">
+        <div class="row">
+
+            <div class="col">
+                <div class="counter-box">
+                    <div class="icon">
+                        <img src="{% static 'img/icon/course.svg' %}">
+                    </div>
+                    <span class="counter" data-from="0" data-to="3" data-speed="2000">3</span>
+                    <h6>+ Total Courses</h6>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="counter-box">
+                    <div class="icon">
+                        <img src="{% static 'img/icon/graduation.svg' %}">
+                    </div>
+                    <span class="counter" data-from="0" data-to="200" data-speed="2000">200</span>
+                    <h6>+ Our Students</h6>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="counter-box">
+                    <div class="icon">
+                        <img src="{% static 'img/icon/teacher-2.svg' %}">
+                    </div>
+                    <span class="counter" data-from="0" data-to="24" data-speed="2000">30</span>
+                    <h6>+ Skilled Lecturers</h6>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="counter-box">
+                    <div class="icon">
+                        <img src="{% static 'img/icon/award.svg' %}">
+                    </div>
+                    <span class="counter" data-from="0" data-to="10" data-speed="2000">10</span>
+                    <h6>+ Win Awards</h6>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Counter Area End -->
+
+
+
+        <!-- Section Heading -->
+        <!-- about-area -->
+<!-- ===============================
+     OUR INSTITUTE SECTION
+================================= -->
+<div class="about-modern py-120">
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+
+                <span class="site-title-tagline">
+                    <i class="far fa-hospital"></i> Our Institute
+                </span>
+
+                <h2 class="site-title">
+                    Woodland <span>Institute of Nursing</span>
+                </h2>
+
+                <p class="intro-text">
+                    Woodland Institute of Nursing, under the umbrella of Woodland Hospital, Shillong,
+                    is a reputed private nursing institution committed to excellence in nursing education.
+                </p>
+
+            </div>
+        </div>
+
+        <!-- Content -->
+        <!--<div class="row align-items-center g-5">-->
+            <div class="row align-items-start justify-content-center g-5">
+
+            <!-- IMAGE -->
+            <!--<div class="col-lg-5">-->
+            <div class="col-lg-5 text-center">
+
+                <div class="about-modern-img">
+                    <img src="{% static 'img/about/eve5.jpg' %}" 
+                         alt="Woodland Institute of Nursing"
+                         class="img-fluid">
+                </div>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="col-lg-7">
+
+                <div class="about-modern-content">
+
+                    <p>
+                        The institute is established under the aegis of the
+                        <strong>North East Hub Society (NEHUBS)</strong>, a registered
+                        Non-Government Organization dedicated to educational and social
+                        development in the North Eastern region of India. Located in the
+                        serene city of Shillong, Meghalaya, the institute provides an ideal
+                        environment for focused learning and personal growth.
+                    </p>
+
+                    <p>
+                        Woodland Institute of Nursing is duly recognized by the
+                        <strong>Meghalaya Nursing Council (MNC)</strong> and the
+                        <strong>Indian Nursing Council (INC)</strong>, New Delhi,
+                        ensuring that all academic programs meet national standards
+                        of nursing education.
+                    </p>
+
+                    <p>
+                        The institute is affiliated with
+                        <strong>North Eastern Hill University (NEHU)</strong>,
+                        providing strong academic credibility to its programs.
+                    </p>
+
+                    <p>
+                        Students benefit from extensive hands-on clinical exposure
+                        at <strong>Woodland Hospital</strong>, allowing them to apply
+                        classroom knowledge in real healthcare environments and build
+                        confidence in patient care.
+                    </p>
+
+                    <!-- Highlights -->
+                    <ul class="about-highlights">
+
+                        <li>
+                            <i class="far fa-check-circle"></i>
+                            Recognized by Indian Nursing Council (INC) & Meghalaya Nursing Council (MNC)
+                        </li>
+
+                        <li>
+                            <i class="far fa-check-circle"></i>
+                            Affiliated with North Eastern Hill University (NEHU)
+                        </li>
+
+                        <li>
+                            <i class="far fa-check-circle"></i>
+                            Extensive hospital-based clinical training
+                        </li>
+
+                        <li>
+                            <i class="far fa-check-circle"></i>
+                            Modern skill labs and simulation-based learning
+                        </li>
+
+                        <li>
+                            <i class="far fa-check-circle"></i>
+                            Highly experienced and supportive faculty
+                        </li>
+
+                        <li>
+                            <i class="far fa-check-circle"></i>
+                            Peaceful and student-friendly campus environment
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- OUR INSTITUTE SECTION END -->
+
+
+<!-- video-area -->
+            <div class="video-area py-120">
+            <div class="container">
+            <div class="row g-4 align-items-center">
+
+                <!-- LEFT CONTENT -->
+                <div class="col-lg-4 wow fadeInLeft" data-wow-delay=".25s">
+
+                <div class="site-heading mb-3">
+                <span class="site-title-tagline">
+                <i class="far fa-book-open-reader"></i> Latest Video
+                </span>
+
+                <h2 class="site-title">
+                Let's Check Our <span>Latest</span> Video
+                </h2>
+                </div>
+
+                <p class="about-text">
+                Experience the vibrant learning environment at Woodland Institute of Nursing,
+                where students develop the knowledge, skills, and compassion needed to excel
+                in the healthcare profession.
+                </p>
+
+                {% comment %} <a href="{% url 'dynamic_page' 'about' %}" class="theme-btn mt-30">
+                Learn More <i class="fas fa-arrow-right-long"></i>
+                </a> {% endcomment %}
+
+                <a href="{% url 'announcement_category' 'admission' %}" class="theme-btn mt-30">
+                    Learn More <i class="fas fa-arrow-right-long"></i>
+                </a>
+
+                </div>
+
+
+                    <!-- RIGHT VIDEO -->
+                    <div class="col-lg-8 wow fadeInRight" data-wow-delay=".25s">
+
+                    <div class="video-wrapper">
+
+                    <a href="https://www.youtube.com/watch?v=KXO9mj-rGcM" target="_blank">
+
+                    <img src="https://img.youtube.com/vi/KXO9mj-rGcM/maxresdefault.jpg"
+                    class="img-fluid video-thumbnail"
+                    alt="Woodland Institute Video">
+
+                    <span class="video-play-btn">
+                    <i class="fas fa-play"></i>
+                    </span>
+
+                </a>
+
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+                </div>
+<!-- video-area end -->
+        {% load static %}
+
+
+        <!-- gallery-area -->
+        <div class="gallery-area py-120">
+            <div class="container-wide">
+                <div class="row">
+                    <div class="col-12 text-center">
+
+                        <div class="site-heading text-center">
+                            <span class="site-title-tagline"><i class="far fa-book-open-reader"></i> Gallery</span>
+                            <h2 class="site-title">Our Photo <span>Gallery</span></h2>
+                            <p>It is a long established fact that a reader will be distracted by the readable content of
+                                a page when looking at its layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row popup-gallery">
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay=".25s">
+                        <div class="gallery-item">
+                            <div class="gallery-img">
+                                 <!--<img src="{% static 'img/gallery/w.png' %}" alt="">-->
+                                 <img src="{% static 'img/gallery/expression 1.jpg' %}" alt="">
+
+                                {% comment %} <img src="{% static 'img/gallery/01.jpg' %}" alt=""> {% endcomment %}
+                            </div>
+                            <div class="gallery-content">
+                                
+                                 <a class="popup-img gallery-link" href="img/gallery/01.jng"><i
+                                        class="fal fa-plus"></i></a> 
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <div class="gallery-img">
+                               <!--<img src="{% static 'img/gallery/A.png' %}" alt="">-->
+                               <img src="{% static 'img/gallery/p.jpg' %}" alt="">
+
+                            </div>
+                            <div class="gallery-content">
+                                <a class="popup-img gallery-link" href="img/gallery/student.jpg"><i
+                                        class="fal fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay=".50s">
+                        <div class="gallery-item">
+                            <div class="gallery-img">
+                                <img src="{% static 'img/gallery/03.jpeg' %}" alt="">
+                            </div>
+                            <div class="gallery-content">
+                                <a class="popup-img gallery-link" href="img/gallery/03.jpg"><i
+                                        class="fal fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <div class="gallery-img">
+                                <img src="{% static 'img/gallery/LIBRARY.jpg' %}" alt="">
+                            </div>
+                            <div class="gallery-content">
+                                <a class="popup-img gallery-link" href="img/gallery/04.jpg"><i
+                                        class="fal fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay=".75s">
+                        <div class="gallery-item">
+                            <div class="gallery-img">
+                                <img src="{% static 'img/gallery/sports.jpg' %}" alt="">
+                            </div>
+                            <div class="gallery-content">
+                                <a class="popup-img gallery-link" href="img/gallery/05.jpg"><i
+                                        class="fal fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <div class="gallery-img">
+                                <img src="{% static 'img/gallery/books.jpeg' %}" alt="">
+                            </div>
+                            <div class="gallery-content">
+                                <a class="popup-img gallery-link" href="img/gallery/06.jpg"><i
+                                        class="fal fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- gallery-area end -->
+
+
+       
+
+        <!--This is my event area-->
+       <!-- Leadership Area -->
+<div class="leadership-area py-120">
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <div class="site-heading">
+                    <span class="site-title-tagline">
+                        <i class="far fa-user"></i> Leadership
+                    </span>
+                    <h2 class="site-title">
+                        Message From <span>Our Leadership</span>
+                    </h2>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Leadership List -->
+        <div class="leadership-list">
+
+            {% for leader in leadership_messages %}
+            <div class="leadership-item">
+
+                <div class="row align-items-start">
+
+                    <!-- Left Image -->
+                    <div class="col-md-3">
+                        <div class="leadership-img">
+                            <img src="{{ leader.photo.url }}" 
+                                 alt="{{ leader.name }}" 
+                                 class="img-fluid">
+                        </div>
+                    </div>
+
+                    <!-- Right Content -->
+                    <div class="col-md-9">
+
+                        <h5 class="leader-name">
+                            {{ leader.name }}
+                        </h5>
+
+                        <p class="leader-designation">
+                            {{ leader.designation }}
+                        </p>
+
+                        <p class="leader-message">
+                            {{ leader.message|truncatewords:40 }}
+                        </p>
+
+                        <a href="{% url 'leadership_detail' leader.slug %}" 
+                           class="read-more">
+                            Read more →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+<!-- Leadership Area End -->
+
+
+<!-- enroll area-->
+<div class="enroll-area pt-80 pb-80">
+    <div class="container-wide">
+        <div class="col-lg-12">
+            <div class="row g-5 align-items-center">
+
+                <!-- LEFT SIDE -->
+                <div class="col-lg-6">
+                    <div class="enroll-left wow fadeInLeft" data-wow-delay=".25s">
+                        <div class="enroll-form">
+                            <div class="enroll-form-header">
+                                <h3>Start Your Enrollment</h3>
+                                <p></p>
+                            </div>
+
+                            <!-- Editable Fields -->
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control"
+                                    placeholder="Your Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control"
+                                    placeholder="Email Address">
+                            </div>
+
+                            <div class="form-group">
+                                <select class="form-select" name="service">
+                                    <option value="">Select Course</option>
+                                    <option value="bsc">BSc Nursing</option>
+                                    <option value="pbsc">PBSc Nursing</option>
+                                    <option value="gnm">GNM Nursing</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="message" class="form-control"
+                                    placeholder="Type Message"
+                                    rows="4"></textarea>
+                            </div>
+
+                            <!-- Redirect Button -->
+                            <a href="{% url 'apply_now' %}" class="theme-btn mt-3">
+                                Enroll Now <i class="fas fa-arrow-right-long"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="col-lg-6">
+                    <div class="enroll-right wow fadeInUp" data-wow-delay=".25s">
+                        <div class="skill-content">
+                            <div class="site-heading mb-3">
+                                <span class="site-title-tagline">
+                                    <i class="far fa-book-open-reader"></i> Our Skills
+                                </span>
+                                <h2 class="site-title text-white">
+                                    Explore Your <span>Creativity And Talent</span> With Us
+                                </h2>
+                            </div>
+
+                           <p class="text-white">
+                            At Woodland Institute of Nursing, we believe that every student has unique
+                            talents and the potential to grow into a confident healthcare professional.
+                            Our institute provides a supportive learning environment where students can
+                            explore their abilities, develop clinical skills, and build strong professional
+                            values that are essential in the nursing profession.
+                            </p>
+
+                            <p class="text-white">
+                            Through modern teaching methods, hands-on clinical training, skill laboratories,
+                            and mentorship from experienced faculty members, students are encouraged to
+                            think critically, communicate effectively, and deliver compassionate patient
+                            care. Our academic programs are designed not only to build knowledge but also
+                            to nurture leadership, teamwork, and responsibility in healthcare settings.
+                            </p>
+
+                            <p class="text-white">
+                            We provide opportunities for students to participate in workshops, seminars,
+                            health camps, community outreach programs, and cultural activities that help
+                            them grow both professionally and personally. At Woodland Institute of Nursing,
+                            we are committed to shaping skilled nurses who are ready to serve society with
+                            dedication, competence, and compassion.
+                            </p>
+
+                            <div class="skills-section">
+                                <div class="progress-box">
+                                    <h5>Our Students <span class="pull-right">85%</span></h5>
+                                    <div class="progress" data-value="85">
+                                        <div class="progress-bar" role="progressbar"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-box">
+                                    <h5>Our Teachers <span class="pull-right">65%</span></h5>
+                                    <div class="progress" data-value="65">
+                                        <div class="progress-bar" role="progressbar"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-box">
+                                    <h5>Our Courses <span class="pull-right">75%</span></h5>
+                                    <div class="progress" data-value="75">
+                                        <div class="progress-bar" role="progressbar"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Learn More Button -->
+                            <a href="{% url 'announcement_category' 'admission' %}" class="theme-btn mt-5">
+                                Learn More <i class="fas fa-arrow-right-long"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- enroll area end -->
+
+
+<!-- department area -->
+<div class="department-area bg py-120">
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="site-heading text-center">
+                    <span class="site-title-tagline">
+                        <i class="far fa-book-open-reader"></i> Courses
+                    </span>
+                    <h2 class="site-title">
+                        Browse Our <span>Courses</span>
+                    </h2>
+                    <p>
+                        Woodland Institute of Nursing offers professional nursing programs
+                        designed to prepare skilled healthcare professionals.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            {% for course in courses %}
+            <div class="col-md-4">
+                <div class="department-item">
+                    
+                    <div class="department-icon">
+                        <img src="{% static 'img/icon/health.svg' %}" alt="{{ course.heads }}">
+                    </div>
+
+                    <div class="department-info">
+                        <h4 class="department-title">
+                            <a href="{% url 'courses' course.slug %}">
+                                {{ course.heads }}
+                            </a>
+                        </h4>
+
+                        <p>
+                            {{ course.excerpt|default:"Professional nursing program with quality education and clinical training." }}
+                        </p>
+
+                        <div class="department-btn">
+                            <a href="{% url 'courses' course.slug %}">
+                                Read More <i class="fas fa-arrow-right-long"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+<!-- department area end -->
+
+
+        <!-- testimonial area -->
+<div class="testimonial-area ts-bg pt-80 pb-80">
+    <div class="container-wide">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="site-heading text-center">
+                    <span class="site-title-tagline">
+                        <i class="far fa-book-open-reader"></i> Testimonials
+                    </span>
+                    <h2 class="site-title text-white">
+                        What Our Students <span>Say</span>
+                    </h2>
+                    <p class="text-white">
+                        Hear from our students about their learning experience,
+                        clinical exposure, and career growth at Woodland Institute of Nursing.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonial-slider owl-carousel owl-theme">
+
+            <!-- Testimonial 1 -->
+            <div class="testimonial-item">
+                <div class="testimonial-rate">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="testimonial-quote">
+                    <p>
+                        Woodland Institute of Nursing has given me excellent clinical exposure
+                        and hands-on training. The faculty members are supportive and always
+                        encourage us to grow professionally and personally.
+                    </p>
+                </div>
+                <div class="testimonial-content">
+                    <div class="testimonial-author-img">
+                        <img src="img/testimonial/01.jpg" alt="">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4>Iamonlang Kharsyntiew</h4>
+                        <p>B.Sc Nursing</p>
+                    </div>
+                </div>
+                <span class="testimonial-quote-icon">
+                    <i class="far fa-quote-right"></i>
+                </span>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-item">
+                <div class="testimonial-rate">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="testimonial-quote">
+                    <p>
+                        The institute provides modern laboratories and real hospital
+                        training which helped me build confidence in patient care.
+                        I am proud to be a student here.
+                    </p>
+                </div>
+                <div class="testimonial-content">
+                    <div class="testimonial-author-img">
+                        <img src="img/testimonial/02.jpg" alt="">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4>Riniki Nongrum</h4>
+                        <p>GNM Graduate</p>
+                    </div>
+                </div>
+                <span class="testimonial-quote-icon">
+                    <i class="far fa-quote-right"></i>
+                </span>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-item">
+                <div class="testimonial-rate">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="testimonial-quote">
+                    <p>
+                        The practical training sessions and workshops organized by the
+                        college helped me improve my communication and clinical skills.
+                        The environment is friendly and motivating.
+                    </p>
+                </div>
+                <div class="testimonial-content">
+                    <div class="testimonial-author-img">
+                        <img src="img/testimonial/03.jpg" alt="">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4>Bahunlang Mawlong</h4>
+                        <p>B.Sc Nursing</p>
+                    </div>
+                </div>
+                <span class="testimonial-quote-icon">
+                    <i class="far fa-quote-right"></i>
+                </span>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-item">
+                <div class="testimonial-rate">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="testimonial-quote">
+                    <p>
+                        The teachers focus on both academic excellence and
+                        practical knowledge. The clinical postings prepared
+                        me well for real hospital situations.
+                    </p>
+                </div>
+                <div class="testimonial-content">
+                    <div class="testimonial-author-img">
+                        <img src="img/testimonial/04.jpg" alt="">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4>Wandari Kharshiing</h4>
+                        <p>Alumni</p>
+                    </div>
+                </div>
+                <span class="testimonial-quote-icon">
+                    <i class="far fa-quote-right"></i>
+                </span>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="testimonial-item">
+                <div class="testimonial-rate">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="testimonial-quote">
+                    <p>
+                        I gained strong clinical knowledge and professional
+                        discipline during my time here. Woodland Institute
+                        truly prepares students for successful nursing careers.
+                    </p>
+                </div>
+                <div class="testimonial-content">
+                    <div class="testimonial-author-img">
+                        <img src="img/testimonial/05.jpg" alt="">
+                    </div>
+                    <div class="testimonial-author-info">
+                        <h4>Banrida Lyngdoh</h4>
+                        <p>GNM Graduate</p>
+                    </div>
+                </div>
+                <span class="testimonial-quote-icon">
+                    <i class="far fa-quote-right"></i>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- testimonial area end -->
+
+    </main>
+
+   {% endif %}
+    <!-- footer area -->
+   {% include 'includes/footer.html' %}
+    <!-- footer area end -->
+
+
+    <!-- scroll-top -->
+    <a href="#" id="scroll-top"><i class="far fa-arrow-up-from-arc"></i></a>
+    <!-- scroll-top end -->
+
+
+    <!-- js why choose us -->
+ <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const btn = document.getElementById("chooseReadBtn");
+  const content = document.getElementById("chooseMoreContent");
+
+  btn.addEventListener("click", function () {
+
+    if (content.style.display === "none") {
+      content.style.display = "block";
+      btn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
+    } else {
+      content.style.display = "none";
+      btn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+    }
+
+  });
+
+});
+</script>
+
+<!-- js end -->
+<!--about us-->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const btn = document.getElementById("aboutReadBtn");
+  const content = document.getElementById("aboutContentWrapper");
+
+  if (btn && content) {
+
+    btn.addEventListener("click", function () {
+
+      content.classList.toggle("expanded");
+
+      if (content.classList.contains("expanded")) {
+        btn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
+      } else {
+        btn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+      }
+
+    });
+
+  }
+
+});
+</script>
+<!--about us end-->
+<!-- JS FILES -->
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'js/modernizr.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'js/jquery.appear.min.js' %}"></script>
+<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/counter-up.js' %}"></script>
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<!-- ABOUT IMAGE POPUP SCRIPT -->
+<script>
+$(document).ready(function() {
+    $('.popup-gallery').magnificPopup({
+        delegate: 'a.popup-img',
+        type: 'image',
+        gallery: {
+            enabled: true
+        },
+        image: {
+            verticalFit: false
+        }
+    });
+});
+</script>
+
+<!-- PRELOADER -->
+<script>
+window.addEventListener('load', function () {
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+        preloader.style.display = 'none';
+    }
+});
+</script>
+
+
+
+    {% comment %} <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/modernizr.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.appear.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/counter-up.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>  
+
+    <script>
+  window.addEventListener('load', function () {
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+      preloader.style.display = 'none';
+    }
+  });
+</script> {% endcomment %}
+
+
+</body>
+
+</html>

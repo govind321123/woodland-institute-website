@@ -1,0 +1,37 @@
+{% extends "details.html" %}
+
+{% block title %}{{ category.title }}{% endblock %}
+
+{% block menus %}{{ category.title }}{% endblock %}
+
+{% block module %}Announcements{% endblock %}
+
+{% block activemenus %}{{ category.title }}{% endblock %}
+
+{% block contents %}
+<section class="announcement-section py-5">
+    <div class="container">
+
+        {% for announcement in announcements %}
+            <div class="mb-4 p-4 border rounded bg-white">
+
+                {% if announcement.description %}
+                    {{ announcement.description|safe }}
+                {% endif %}
+
+                {% if announcement.pdf_file %}
+                    <a href="{{ announcement.pdf_file.url }}"
+                       class="btn btn-primary mt-3"
+                       target="_blank">
+                        📄 Download PDF
+                    </a>
+                {% endif %}
+
+            </div>
+        {% empty %}
+            <p>No announcements available.</p>
+        {% endfor %}
+
+    </div>
+</section>
+{% endblock %}

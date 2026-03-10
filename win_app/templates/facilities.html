@@ -1,0 +1,13 @@
+{% extends 'details.html' %}
+
+{% block menus %} {{ singlefacilities.heads }} {% endblock %}
+
+{% block module %} Facilities {% endblock %}
+
+{% block activemenus %} {{ singlefacilities.heads }} {% endblock %}
+
+{{ singlefacilities.heads }}
+
+{% block contents %}         
+    {{ singlefacilities.details|safe }}
+{% endblock %}

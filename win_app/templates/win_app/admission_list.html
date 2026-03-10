@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container py-120">
+    <h2>Administration</h2>
+
+    <ul class="list-group">
+        {% for admin in administrations %}
+            <li class="list-group-item">
+                <a href="{% url 'administration_detail' admin.slug %}">
+                    {{ admin.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
+

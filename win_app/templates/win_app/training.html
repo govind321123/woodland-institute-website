@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Clinical Training & Infrastructure{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-area bg-light py-3">
+    <div class="container">
+        <h4 class="mb-0">Clinical Training & Infrastructure</h4>
+        <small>
+            <a href="{% url 'home' %}">Home</a> / Training
+        </small>
+    </div>
+</div>
+
+<div class="container py-5">
+
+    <!-- Clinical Training -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="mb-3">Practical Exposure & Clinical Training</h2>
+            <p>
+                Clinical training is a cornerstone of nursing education at
+                <strong>Woodland Nursing Institute</strong>. The institute ensures that
+                students gain real-world exposure through structured clinical postings
+                under the guidance of experienced faculty and clinical instructors.
+            </p>
+        </div>
+    </div>
+
+    <!-- Hospitals -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <h4 class="mb-4">Affiliated Clinical Training Facilities</h4>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card p-3 h-100">Civil Hospital</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 h-100">Sanker</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 h-100">Ganesh Das Hospital</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 h-100">Woodland Hospital</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 h-100">Nazareth Hospital</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 h-100">
+                        NEIGRIHMS
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card p-3 h-100">
+                        Urban & Rural Community Health Areas
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <p>
+                Students receive hands-on experience in medical-surgical nursing,
+                obstetrics and gynaecology, paediatrics, psychiatry, mental health,
+                emergency care, and community health nursing. This exposure prepares
+                them to handle diverse healthcare situations with competence,
+                confidence, and compassion.
+            </p>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- Infrastructure -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="mb-3">Infrastructure & Learning Resources</h2>
+            <p>
+                The institute provides modern infrastructure to support effective
+                teaching and learning.
+            </p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Well-equipped nursing laboratories</li>
+                <li class="list-group-item">Anatomy & physiology laboratories</li>
+                <li class="list-group-item">Nutrition laboratories</li>
+                <li class="list-group-item">Computer laboratories</li>
+                <li class="list-group-item">Audio-visual classrooms</li>
+                <li class="list-group-item">
+                    Well-stocked library with textbooks, journals & digital resources
+                </li>
+            </ul>
+
+            <p class="mt-3">
+                Simulation-based learning enables students to practise clinical
+                procedures in a safe and controlled environment before engaging in
+                real patient care.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

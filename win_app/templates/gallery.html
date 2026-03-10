@@ -1,0 +1,64 @@
+{% extends 'details.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+
+{# ================= BREADCRUMB BLOCKS ================= #}
+{% block menus %} {{ category.name }} {% endblock %}
+{% block module %} Gallery {% endblock %}
+{% block activemenus %} {{ category.name }} {% endblock %}
+
+{% block contents %}
+
+<!-- ================= GALLERY SECTION ================= -->
+<div class="gallery-container popup-gallery" style="padding:20px;">
+
+    {% if gallery_items %}
+        {% for item in gallery_items %}
+
+            <!-- SINGLE GALLERY ITEM -->
+            <div class="gallery-item"
+                 style="
+                    display:inline-block;
+                    width:300px;
+                    margin:15px;
+                    vertical-align:top;
+                    text-align:center;
+                 ">
+
+                <!-- CLICKABLE IMAGE (POPUP) -->
+                <a href="{{ item.image.url }}" class="popup-img">
+                    <img src="{{ item.image.url }}"
+                         alt="{{ item.heads }}"
+                         style="
+                            width:100%;
+                            height:200px;
+                            object-fit:cover;
+                            border-radius:12px;
+                            box-shadow:0 4px 8px rgba(0,0,0,0.15);
+                            cursor:pointer;
+                            transition:transform 0.3s ease;
+                         ">
+                </a>
+
+                <!-- OPTIONAL DESCRIPTION -->
+                {% if item.description %}
+                <div class="gallery-caption" style="margin-top:10px;">
+                    <p>{{ item.description|safe }}</p>
+                </div>
+                {% endif %}
+
+            </div>
+            <!-- END SINGLE GALLERY ITEM -->
+
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center;">No images uploaded for this category yet.</p>
+    {% endif %}
+
+</div>
+<!-- ================= END GALLERY SECTION ================= -->
+
+{% endblock %}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admission Form</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+}
+
+.admission-wrapper {
+    max-width: 850px;
+    margin: auto;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 26px;
+}
+
+.form-row {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+textarea {
+    resize: none;
+    height: 90px;
+}
+
+.two-col {
+    display: flex;
+    gap: 12px;
+}
+
+.declaration-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.declaration-box label {
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    margin-top: 4px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #6c63ff, #4e54c8);
+    color: #fff;
+    cursor: pointer;
+}
+
+.errorlist {
+    color: red;
+    font-size: 14px;
+    margin: 4px 0 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+@media (max-width: 600px) {
+    .two-col {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="admission-wrapper">
+    <h2>Admission Form</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Student Name -->
+        <div class="form-row">
+            <label>Student Name <span style="color:red">*</span></label>
+            <div class="two-col">
+                {{ form.first_name }}
+                {{ form.last_name }}
+            </div>
+            {{ form.first_name.errors }}
+            {{ form.last_name.errors }}
+        </div>
+
+        <!-- Program -->
+        <div class="form-row">
+            <label>Applying For <span style="color:red">*</span></label>
+            {{ form.program }}
+            {{ form.program.errors }}
+        </div>
+
+        <!-- DOB -->
+        <div class="form-row">
+            <label>Date of Birth <span style="color:red">*</span></label>
+            {{ form.dob }}
+            {{ form.dob.errors }}
+        </div>
+
+        <!-- Father -->
+        <div class="form-row">
+            <label>Father First Name <span style="color:red">*</span></label>
+            {{ form.father_first_name }}
+            {{ form.father_first_name.errors }}
+        </div>
+
+        <div class="form-row">
+            <label>Father Last Name <span style="color:red">*</span></label>
+            {{ form.father_last_name }}
+            {{ form.father_last_name.errors }}
+        </div>
+
+        <!-- Mother -->
+        <div class="form-row">
+            <label>Mother First Name <span style="color:red">*</span></label>
+            {{ form.mother_first_name }}
+            {{ form.mother_first_name.errors }}
+        </div>
+
+        <div class="form-row">
+            <label>Mother Last Name <span style="color:red">*</span></label>
+            {{ form.mother_last_name }}
+            {{ form.mother_last_name.errors }}
+        </div>
+
+        <!-- Address -->
+        <div class="form-row">
+            <label>Current Address <span style="color:red">*</span></label>
+            {{ form.address }}
+            {{ form.address.errors }}
+        </div>
+
+        <!-- Phone -->
+        <div class="form-row">
+            <label>Phone Number <span style="color:red">*</span></label>
+            {{ form.contact_number }}
+            {{ form.contact_number.errors }}
+        </div>
+
+        <!-- Email -->
+        <div class="form-row">
+            <label>Email <span style="color:red">*</span></label>
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+
+        <!-- Uploads -->
+        <div class="form-row">
+            <label>Upload Photo (Max 6 MB) <span style="color:red">*</span></label>
+            {{ form.photo }}
+            {{ form.photo.errors }}
+        </div>
+
+        <div class="form-row">
+            <label>Upload Document <span style="color:red">*</span></label>
+            {{ form.document }}
+            {{ form.document.errors }}
+        </div>
+
+        <!-- Declaration -->
+        <div class="form-row">
+            <div class="declaration-box">
+                {{ form.agree }}
+                <label>
+                    I hereby declare that the information provided above is true,
+                    complete, and correct to the best of my knowledge and belief.
+                    <span style="color:red">*</span>
+                </label>
+            </div>
+            {{ form.agree.errors }}
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Submit Application
+        </button>
+
+    </form>
+</div>
+
+</body>
+</html>

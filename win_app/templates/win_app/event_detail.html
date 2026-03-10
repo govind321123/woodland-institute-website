@@ -1,0 +1,104 @@
+{% extends 'details.html' %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block menus %}{{ event.title }}{% endblock %}
+
+{% block module %}Events{% endblock %}
+
+{% block activemenus %}{{ event.title }}{% endblock %}
+
+{% block contents %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+
+            <div class="card shadow-sm border-0 rounded-4">
+
+                {% if event.image %}
+                <img src="{{ event.image.url }}"
+                     alt="{{ event.title }}"
+                     class="img-fluid rounded-top-4"
+                     style="height:400px; object-fit:cover; width:100%;">
+                {% endif %}
+
+                <div class="card-body p-5">
+
+                    <!-- Date Badge -->
+                    <div class="mb-3">
+                        <span class="badge px-3 py-2"
+                              style="background:#f4a261; font-size:14px;">
+                            📅 {{ event.date|date:"F d, Y" }}
+                        </span>
+                    </div>
+
+                    <!-- Title -->
+                    <h2 class="fw-bold mb-4" style="color:#0d3b66;">
+                        {{ event.title }}
+                    </h2>
+
+                    <!-- Divider -->
+                    <hr style="width:80px; height:3px; background:#0d3b66; border:none; margin-bottom:25px;">
+
+                    <!-- Details -->
+                    <div class="event-details text-muted"
+                         style="line-height:1.9; font-size:16px;">
+                        {{ event.details|safe }}
+                    </div>
+
+                    <!-- Back Button -->
+                    <div class="mt-4">
+                        <a href="{% url 'events' %}"
+                        class="btn px-4 py-2"
+                        style="background:#0d3b66; color:white; border-radius:30px;">
+                            ← Back to Events
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% comment %} {% extends 'details.html' %}
+
+{% block content %}
+<h1>{{ event.title }}</h1>
+
+{% if event.image %}
+<img src="{{ event.image.url }}" alt="{{ event.title }}">
+{% endif %}
+
+<p><strong>Date:</strong> {{ event.date|date:"M d, Y" }}</p>
+
+<div>
+    {{ event.description|safe }}
+</div>
+
+<div>
+    {{ event.details|safe }}
+</div>
+
+<a href="{% url 'events' %}">Back to all events</a>
+{% endblock %} {% endcomment %}
+
+
+
+
+
+
+
+
+
+

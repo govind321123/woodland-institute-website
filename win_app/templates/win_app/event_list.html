@@ -1,0 +1,113 @@
+{% extends 'details.html' %}
+
+{% block title %}Events{% endblock %}
+
+{% block menus %}Events{% endblock %}
+
+{% block module %}Events{% endblock %}
+
+{% block activemenus %}Events{% endblock %}
+
+{% block contents %}
+
+<div class="container py-5">
+
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">All Events</h2>
+        <hr style="width:80px; height:3px; background:#f4a261; border:none; margin:auto;">
+    </div>
+
+    <div class="row">
+
+        {% for event in events %}
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card shadow-sm border-0 rounded-4 h-100 event-card">
+
+                {% if event.image %}
+                <img src="{{ event.image.url }}"
+                     class="card-img-top rounded-top-4"
+                     alt="{{ event.title }}"
+                     style="height:220px; object-fit:cover;">
+                {% endif %}
+
+                <div class="card-body p-4">
+
+                    <!-- Date -->
+                    <p class="text-muted mb-2">
+                        📅 {{ event.date|date:"F d, Y" }}
+                    </p>
+
+                    <!-- Title -->
+                    <h5 class="fw-bold">
+                        {{ event.title }}
+                    </h5>
+
+                    <!-- Short Description -->
+                    <p class="text-muted">
+                        {{ event.description|truncatewords:20 }}
+                    </p>
+
+                    <!-- Button -->
+                    <a href="{% url 'event_detail' event.slug %}"
+                       class="btn btn-sm mt-2 px-4"
+                       style="background:#0d3b66; color:white; border-radius:30px;">
+                        View Details →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% empty %}
+        <div class="text-center py-5">
+            <p class="text-muted">No events available at the moment.</p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'details.html' %}
+
+ {% block contents %}
+ <h1>All Events</h1>
+
+<ul>
+{% for event in events %}
+    <li>
+        <a href="{% url 'event_detail' event.slug %}">
+            {{ event.title }}
+        </a>
+        - {{ event.date|date:"M d, Y" }}
+        <div>
+            {{ event.description|safe|truncatewords:20 }}
+        </div>
+    </li>
+{% endfor %}
+</ul> 
+
+
+
+
+{% endblock %} {% endcomment %}
+
+
+
+
+
+
+

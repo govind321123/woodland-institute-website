@@ -1,0 +1,219 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Administration{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all-fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- ✅ ADMIN IMAGE FIX -->
+    <style>
+        .admin-img-wrapper {
+            width: 100%;
+            height: 250px;
+            background: #f2f3f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .admin-img-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;   /* 🔥 NO FACE CUT */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    {% include "includes/menus.html" %}
+
+    <main class="container py-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+
+
+
+
+{% comment %} 2026 changes{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Administration{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all-fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- SAME NAVIGATION BAR AS HOME -->
+    {% include "includes/menus.html" %}
+
+    <main class="container py-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html> {% endcomment %}
+
+
+
+
+
+{% comment %} Final administration {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Administration{% endblock %}</title>
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/all-fontawesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<!-- ⭐ Include the same menu as Home page -->
+{% include "includes/menus.html" %}
+
+<main class="main py-4">
+  {% block content %}{% endblock %}
+</main>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html> {% endcomment %}
+
+
+
+
+
+
+
+
+{% comment %} works
+
+
+
+
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Eduka{% endblock %}</title>
+<link rel="icon" type="image/x-icon" href="{% static 'img/logo/favicon.png' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/all-fontawesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/magnific-popup.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="preloader">
+  <div class="loader-book">
+    <div class="loader-book-page"></div>
+    <div class="loader-book-page"></div>
+    <div class="loader-book-page"></div>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-top">
+    <div class="container d-flex justify-content-between">
+      <div class="header-top-social">
+        <span>Follow Us: </span>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="header-top-contact">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item"><a href="#"><i class="far fa-location-dot"></i> 25/B Milford Road, New York</a></li>
+          <li class="list-inline-item"><a href="mailto:info@example.com"><i class="far fa-envelopes"></i> info@example.com</a></li>
+          <li class="list-inline-item"><a href="tel:+21236547898"><i class="far fa-phone-volume"></i> +2 123 654 7898</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-navigation">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container position-relative">
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <img src="{% static 'img/logo/logo.png' %}" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav">
+          <span class="navbar-toggler-icon"><i class="far fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main_nav">
+          <ul class="navbar-nav ms-auto">
+            {% for link in nav_links %}
+              <li class="nav-item">
+                <a class="nav-link {% if current == link.url_name %}active{% endif %}"
+                   href="{{ link.url }}">
+                  {{ link.name }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="main py-4">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer-area mt-4">
+  <div class="footer-shape">
+    <img src="{% static 'img/shape/03.png' %}" alt="">
+  </div>
+</footer>
+
+<a href="#" id="scroll-top"><i class="far fa-arrow-up-from-arc"></i></a>
+
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+
+ {% endcomment %}
