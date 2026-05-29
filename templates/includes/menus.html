@@ -156,24 +156,26 @@
                     </li>
 
                     <!-- Gallery -->
+                    <!-- Gallery -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"
-                           href="#"
-                           data-bs-toggle="dropdown">
-                           Gallery
+                        href="#"
+                        data-bs-toggle="dropdown">
+                        Gallery
                         </a>
 
                         <ul class="dropdown-menu">
                             {% for g in galleries %}
                                 <li>
                                     <a class="dropdown-item"
-                                       href="{% url 'gallery' g.slug %}">
+                                    href="{% url 'gallery_category' g.slug %}">
                                         {{ g.name }}
                                     </a>
                                 </li>
                             {% endfor %}
                         </ul>
                     </li>
+                  
 
                     <!-- Events -->
                     <li class="nav-item">
@@ -232,10 +234,23 @@
                 </ul>
 
                 <!-- Apply Button -->
-                <div class="nav-right-btn ms-3">
+               <!-- <div class="nav-right-btn ms-3">
                     <a href="{% url 'apply_now' %}" class="theme-btn">
                         Apply Now
                     </a>
+                </div>-->
+                <div class="nav-right-btn ms-3">
+
+                    {% if admission_open %}
+                        <a href="{% url 'apply_now' %}" class="theme-btn">
+                            Apply Now
+                        </a>
+                    {% else %}
+                        <span class="theme-btn" style="background:#999; cursor:not-allowed;">
+                            Admissions Closed
+                        </span>
+                    {% endif %}
+
                 </div>
 
             </div>

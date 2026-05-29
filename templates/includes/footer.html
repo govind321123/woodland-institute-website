@@ -1,4 +1,5 @@
 {% load static %}
+{% load text_cleaner %}
 <footer class="footer-area">
     <div class="footer-shape">
         <img src="{% static 'img/shape/03.png' %}" alt="">
@@ -28,7 +29,8 @@
                                 </a>
                             </li>
                             <li>
-                                <i class="far fa-map-marker-alt"></i> {{ organization.address_name }}
+                                <!--<i class="far fa-map-marker-alt"></i> {{ organization.address_name }}-->
+                                <i class="far fa-map-marker-alt"></i> {{ organization.address_name|clean_text }}
                             </li>
                             <li>
                                 <a href="mailto:{{ organization.email_id }}">
@@ -53,7 +55,8 @@
                             <li>
                                 <a href="{{ link.url }}">
                                     <i class="fas fa-caret-right"></i>
-                                    {{ link.title }}
+                                    <!--{{ link.title }}-->
+                                    {{ link.title|clean_text }}
                                 </a>
                             </li>
                             {% empty %}
@@ -78,11 +81,12 @@
                     <div class="col-md-6 align-self-center">
                         <p class="copyright-text">
                             &copy; Copyright <span id="date"></span>
-                            <a href="#"> {{ organization.heads }} </a>
+                            <!--<a href="#"> {{ organization.heads }} </a>-->
+                            <a href="#"> {{ organization.heads|clean_text }} </a>
                             All Rights Reserved.
                             <br>
                             Designed and Developed by 
-                            <strong>Ctech Solution</strong>
+                            <strong>CTech Solution</strong>
                         </p>
                     </div>
 

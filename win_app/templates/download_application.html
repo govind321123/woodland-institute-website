@@ -1,0 +1,14 @@
+<h2>Download Your Application</h2>
+
+<form method="POST">
+{% csrf_token %}
+
+<label>Application ID</label>
+<input type="text" name="application_id" required>
+
+<label>Date of Birth</label>
+<input type="date" name="dob" required>
+
+<button type="submit">Download Application</button>
+
+</form>

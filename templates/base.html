@@ -50,7 +50,7 @@
                                     <a href="#"><i class="far fa-location-dot"></i> {{ organization.address_name }} </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:info@example.com"><i class="far fa-envelopes"></i> {{ organization.email_id }}</a>
+                                    <a href="mailto:info@example.com"><i class="far fa-envelope"></i> {{ organization.email_id }}</a>
                                 </li>
                                 <li>
                                     <a href="tel:+21236547898"><i class="far fa-phone-volume"></i> {{ organization.contact_no }}</a>
@@ -118,7 +118,7 @@
     <div class="choose-heading">
       <span class="choose-tag">WHY CHOOSE US</span>
       <h2>
-        Why Choose <span>Woodland Nursing Institute</span>
+        Why Choose <span>Woodland Institute Of Nursing </span>
       </h2>
     </div>
 
@@ -452,7 +452,6 @@
                 </div>
                 </div>
 <!-- video-area end -->
-        {% load static %}
 
 
         <!-- gallery-area -->
@@ -464,8 +463,7 @@
                         <div class="site-heading text-center">
                             <span class="site-title-tagline"><i class="far fa-book-open-reader"></i> Gallery</span>
                             <h2 class="site-title">Our Photo <span>Gallery</span></h2>
-                            <p>It is a long established fact that a reader will be distracted by the readable content of
-                                a page when looking at its layout.</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -480,7 +478,7 @@
                             </div>
                             <div class="gallery-content">
                                 
-                                 <a class="popup-img gallery-link" href="img/gallery/01.jng"><i
+                                 <a class="popup-img gallery-link" href="{% static 'img/gallery/expression 1.jpg' %}"><i
                                         class="fal fa-plus"></i></a> 
                             </div>
                         </div>
@@ -557,7 +555,7 @@
                         <i class="far fa-user"></i> Leadership
                     </span>
                     <h2 class="site-title">
-                        Message From <span>Our Leadership</span>
+                        Message From <span>Administrator</span>
                     </h2>
                     
                 </div>
@@ -844,7 +842,7 @@
                         <img src="img/testimonial/01.jpg" alt="">
                     </div>
                     <div class="testimonial-author-info">
-                        <h4>Iamonlang Kharsyntiew</h4>
+                        
                         <p>B.Sc Nursing</p>
                     </div>
                 </div>
@@ -874,7 +872,7 @@
                         <img src="img/testimonial/02.jpg" alt="">
                     </div>
                     <div class="testimonial-author-info">
-                        <h4>Riniki Nongrum</h4>
+                        
                         <p>GNM Graduate</p>
                     </div>
                 </div>
@@ -904,7 +902,7 @@
                         <img src="img/testimonial/03.jpg" alt="">
                     </div>
                     <div class="testimonial-author-info">
-                        <h4>Bahunlang Mawlong</h4>
+                       
                         <p>B.Sc Nursing</p>
                     </div>
                 </div>
@@ -934,7 +932,7 @@
                         <img src="img/testimonial/04.jpg" alt="">
                     </div>
                     <div class="testimonial-author-info">
-                        <h4>Wandari Kharshiing</h4>
+                        
                         <p>Alumni</p>
                     </div>
                 </div>
@@ -964,7 +962,7 @@
                         <img src="img/testimonial/05.jpg" alt="">
                     </div>
                     <div class="testimonial-author-info">
-                        <h4>Banrida Lyngdoh</h4>
+                        
                         <p>GNM Graduate</p>
                     </div>
                 </div>
@@ -1082,27 +1080,6 @@ window.addEventListener('load', function () {
 
 
 
-    {% comment %} <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
-    <script src="{% static 'js/modernizr.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
-    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'js/jquery.appear.min.js' %}"></script>
-    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/counter-up.js' %}"></script>
-    <script src="{% static 'js/wow.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>  
-
-    <script>
-  window.addEventListener('load', function () {
-    const preloader = document.querySelector('.preloader');
-    if (preloader) {
-      preloader.style.display = 'none';
-    }
-  });
-</script> {% endcomment %}
 
 
 </body>

@@ -1,11 +1,25 @@
-from .models import (
-    OrganizationModel, CoursesModel, FacilitiesModel, SliderModel,
-    AboutUsModel, Administration, Event, GalleryCategory,AnnouncementCategory, LeadershipMessage, FooterSection # 👈 ADD THIS FooterSection
-   
+from django.db.models import Case, When, Value, IntegerField
+from django.utils import timezone
 
+from .models import (
+    OrganizationModel,
+    CoursesModel,
+    FacilitiesModel,
+    SliderModel,
+    AboutUsModel,
+    Administration,
+    Event,
+    GalleryCategory,
+    AnnouncementCategory,
+    LeadershipMessage,
+    FooterSection,
+    AdmissionSettings,   # 👈 ADD THIS
 )
 
 
+# ==============================
+# ✅ MENU DATA
+# ==============================
 def menus(request):
     return {
         "organization": OrganizationModel.objects.first(),
@@ -14,95 +28,107 @@ def menus(request):
         "slider": SliderModel.objects.all(),
         "events": Event.objects.all(),
         "aboutus": AboutUsModel.objects.all().values("excerpt").first(),
-        "administrations": Administration.objects.all(),
-        "galleries": GalleryCategory.objects.all(),   # <-- FIXED NAME
-        'administrations': Administration.objects.filter(is_active=True),
+        "administrations": Administration.objects.filter(is_active=True),
+        "galleries": GalleryCategory.objects.all(),
         "announcement_categories": AnnouncementCategory.objects.filter(is_active=True),
-        # 👇 ADD THIS
         "leadership_messages": LeadershipMessage.objects.all(),
-        
     }
 
-def footer_sections(request):
-    sections = FooterSection.objects.prefetch_related('links').all()
-    return {'footer_sections': sections}
 
-    
-# def admission_menu(request):
+# ==============================
+# ✅ FOOTER
+# ==============================
+def footer_sections(request):
+
+    sections = FooterSection.objects.prefetch_related("links").annotate(
+        custom_order=Case(
+            When(name="Institute Policies", then=Value(1)),
+            When(name="Our Campus", then=Value(2)),
+            When(name="Quick Links", then=Value(3)),
+            default=Value(4),
+            output_field=IntegerField(),
+        )
+    ).order_by("custom_order")
+
+    return {
+        "footer_sections": sections
+    }
+
+
+# ==============================
+# ✅ ADMISSION STATUS
+# ==============================
+def admission_status(request):
+
+    setting = AdmissionSettings.objects.filter(is_active=True).first()
+
+    if not setting:
+        return {"admission_open": False}
+
+    today = timezone.now().date()
+
+    return {
+        "admission_open": setting.start_date <= today <= setting.end_date
+    }
+
+
+
+# from django.db.models import Case, When, Value, IntegerField
+
+# from .models import (
+#     OrganizationModel,
+#     CoursesModel,
+#     FacilitiesModel,
+#     SliderModel,
+#     AboutUsModel,
+#     Administration,
+#     Event,
+#     GalleryCategory,
+#     AnnouncementCategory,
+#     LeadershipMessage,
+#     FooterSection
+# )
+
+
+# def menus(request):
 #     return {
-#         'admissions': Admission.objects.filter(is_active=True)
+#         "organization": OrganizationModel.objects.first(),
+#         "courses": CoursesModel.objects.all(),
+#         "facilities": FacilitiesModel.objects.all(),
+#         "slider": SliderModel.objects.all(),
+#         "events": Event.objects.all(),
+#         "aboutus": AboutUsModel.objects.all().values("excerpt").first(),
+#         "administrations": Administration.objects.filter(is_active=True),
+#         "galleries": GalleryCategory.objects.all(),
+#         "announcement_categories": AnnouncementCategory.objects.filter(is_active=True),
+#         "leadership_messages": LeadershipMessage.objects.all(),
 #     }
 
 
+# def footer_sections(request):
 
-
-
-
-
-
-
-# from .models import (
-#     OrganizationModel, CoursesModel, FacilitiesModel, SliderModel,
-#     GalleryCategory, GalleryItem, AboutUsModel, Administration, Event
-# )
-
-# def menus(request):
-#     organization = OrganizationModel.objects.first()
-#     courses = CoursesModel.objects.all()
-#     events = Event.objects.all()
-#     facilities = FacilitiesModel.objects.all()
-#     slider = SliderModel.objects.all()
-
-#     # New gallery data
-#     gallery_categories = GalleryCategory.objects.all()
-#     gallery_items = GalleryItem.objects.all()
-
-#     aboutus = AboutUsModel.objects.all().values('excerpt').first()
-#     administrations = Administration.objects.all()
-   
-#     return dict(
-#         organization=organization,
-#         courses=courses,
-#         facilities=facilities,
-#         slider=slider,
-
-#         # updated gallery references
-#         gallery_categories=gallery_categories,
-#         gallery_items=gallery_items,
-
-#         aboutus=aboutus,
-#         administrations=administrations,
-#         events=events,
-#     )
-
-
-
-
-
-
-
-
-
-
-# from .models import OrganizationModel, CoursesModel, FacilitiesModel, SliderModel, GalleryModel, AboutUsModel,  Administration, Event  # ← ADD THIS
-# def menus(request):
-#     organization = OrganizationModel.objects.first()
-#     courses = CoursesModel.objects.all()
-#     events = Event.objects.all ()
-#     facilities = FacilitiesModel.objects.all()
-#     slider = SliderModel.objects.all()
-#     gallery = GalleryModel.objects.all()
-#     aboutus = AboutUsModel.objects.all().values('excerpt').first(),
-#     administrations = Administration.objects.all()  # ← ADD THIS
-   
-     
-#     return dict(
-#         organization=organization,
-#         courses=courses,
-#         facilities=facilities,
-#         slider=slider,
-#         gallery=gallery,
-#         aboutus=aboutus,
-#          administrations=administrations,  # ← ADD THIS
-#          events = events,
+#     sections = FooterSection.objects.prefetch_related("links").annotate(
+#         custom_order=Case(
+#             When(name="Institute Policies", then=Value(1)),
+#             When(name="Our Campus", then=Value(2)),
+#             When(name="Quick Links", then=Value(3)),
+#             default=Value(4),
+#             output_field=IntegerField(),
 #         )
+#     ).order_by("custom_order")
+
+#     return {
+#         "footer_sections": sections
+#     }
+
+    
+
+
+
+
+
+
+
+
+
+

@@ -1,224 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Admission Form</title>
+
+   
+<!--<meta charset="UTF-8">
+<title>Admission Form</title>-->
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
+
+*{
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
 }
 
-body {
-    margin: 0;
-    padding: 40px;
-    font-size: 16px;
-    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+body{
+margin:0;
+padding:40px;
+background:#0f6f63;
+background:linear-gradient(135deg,#0f6f63,#1a8f7a);
+font-size:16px;
 }
 
-.admission-wrapper {
-    max-width: 850px;
-    margin: auto;
-    background: #ffffff;
-    padding: 35px;
-    border-radius: 14px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+.admission-wrapper{
+max-width:850px;
+margin:auto;
+background:#fff;
+padding:40px;
+border-radius:14px;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #2c3e50;
-    font-size: 26px;
+h2{
+text-align:center;
+margin-bottom:30px;
+color:#2c3e50;
 }
 
-.form-row {
-    margin-bottom: 18px;
+.form-row{
+margin-bottom:18px;
 }
 
-label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
+label{
+display:block;
+margin-bottom:6px;
+font-weight:600;
 }
 
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+input,select,textarea{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
 }
 
-textarea {
-    resize: none;
-    height: 90px;
+textarea{
+resize:none;
+height:90px;
 }
 
-.two-col {
-    display: flex;
-    gap: 12px;
+/* three column layout */
+
+.three-col{
+display:flex;
+gap:10px;
 }
 
-.declaration-box {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 10px;
-    text-align: left;
+.three-col input{
+flex:1;
 }
 
-.declaration-box label {
-    margin: 0;
-    font-weight: normal;
-    line-height: 1.5;
+/* Gender styling */
+
+.gender-group{
+margin-top:8px;
 }
 
-input[type="checkbox"] {
-    width: auto;
-    margin-top: 4px;
+#id_gender{
+display:flex;
+gap:25px;
+list-style:none;
+padding:0;
+margin:0;
 }
 
-.submit-btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    background: linear-gradient(135deg, #6c63ff, #4e54c8);
-    color: #fff;
-    cursor: pointer;
+#id_gender li{
+display:flex;
+align-items:center;
 }
 
-.errorlist {
-    color: red;
-    font-size: 14px;
-    margin: 4px 0 0;
-    padding-left: 0;
-    list-style: none;
+#id_gender input{
+width:auto;
+margin-right:6px;
+accent-color:#4e54c8;
 }
 
-@media (max-width: 600px) {
-    .two-col {
-        flex-direction: column;
-    }
+/* declaration checkbox */
+
+.declaration-box{
+display:flex;
+align-items:flex-start;
+gap:10px;
+margin-top:10px;
 }
+
+.declaration-box input{
+width:auto;
+margin-top:4px;
+}
+
+/* submit button */
+
+.submit-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+background:linear-gradient(135deg,#6c63ff,#4e54c8);
+color:#fff;
+cursor:pointer;
+transition:0.3s;
+}
+
+.submit-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+.errorlist{
+color:red;
+font-size:14px;
+list-style:none;
+padding:0;
+margin-top:4px;
+}
+
+/* mobile responsive */
+
+@media(max-width:600px){
+
+.three-col{
+flex-direction:column;
+}
+
+#id_gender{
+flex-direction:row;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="admission-wrapper">
-    <h2>Admission Form</h2>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+<div style="display:flex; align-items:center; justify-content:center; gap:15px;">
 
-        <!-- Student Name -->
-        <div class="form-row">
-            <label>Student Name <span style="color:red">*</span></label>
-            <div class="two-col">
-                {{ form.first_name }}
-                {{ form.last_name }}
-            </div>
-            {{ form.first_name.errors }}
-            {{ form.last_name.errors }}
-        </div>
+<img src="/static/img/course/logoo.png" alt="Woodland Logo" class="main-logo"
+     style="width:60px; height:60px; object-fit:contain;">
 
-        <!-- Program -->
-        <div class="form-row">
-            <label>Applying For <span style="color:red">*</span></label>
-            {{ form.program }}
-            {{ form.program.errors }}
-        </div>
+{% comment %} <h2 style="margin:0; color:#ffffff;">
+Woodland Institute Of Nursing<br>
+</h2> {% endcomment %}
 
-        <!-- DOB -->
-        <div class="form-row">
-            <label>Date of Birth <span style="color:red">*</span></label>
-            {{ form.dob }}
-            {{ form.dob.errors }}
-        </div>
+<h2 style="margin:0;">
+Woodland Institute Of Nursing<br>
+</h2>
 
-        <!-- Father -->
-        <div class="form-row">
-            <label>Father First Name <span style="color:red">*</span></label>
-            {{ form.father_first_name }}
-            {{ form.father_first_name.errors }}
-        </div>
+</div>
 
-        <div class="form-row">
-            <label>Father Last Name <span style="color:red">*</span></label>
-            {{ form.father_last_name }}
-            {{ form.father_last_name.errors }}
-        </div>
+<h2>Admission Form</h2>
 
-        <!-- Mother -->
-        <div class="form-row">
-            <label>Mother First Name <span style="color:red">*</span></label>
-            {{ form.mother_first_name }}
-            {{ form.mother_first_name.errors }}
-        </div>
+<form method="post" enctype="multipart/form-data">
 
-        <div class="form-row">
-            <label>Mother Last Name <span style="color:red">*</span></label>
-            {{ form.mother_last_name }}
-            {{ form.mother_last_name.errors }}
-        </div>
+{% csrf_token %}
 
-        <!-- Address -->
-        <div class="form-row">
-            <label>Current Address <span style="color:red">*</span></label>
-            {{ form.address }}
-            {{ form.address.errors }}
-        </div>
+<!-- Student Name -->
 
-        <!-- Phone -->
-        <div class="form-row">
-            <label>Phone Number <span style="color:red">*</span></label>
-            {{ form.contact_number }}
-            {{ form.contact_number.errors }}
-        </div>
+<div class="form-row">
 
-        <!-- Email -->
-        <div class="form-row">
-            <label>Email <span style="color:red">*</span></label>
-            {{ form.email }}
-            {{ form.email.errors }}
-        </div>
+<label>Student Name *</label>
 
-        <!-- Uploads -->
-        <div class="form-row">
-            <label>Upload Photo (Max 6 MB) <span style="color:red">*</span></label>
-            {{ form.photo }}
-            {{ form.photo.errors }}
-        </div>
+<div class="three-col">
 
-        <div class="form-row">
-            <label>Upload Document <span style="color:red">*</span></label>
-            {{ form.document }}
-            {{ form.document.errors }}
-        </div>
+{{ form.first_name }}
+{{ form.middle_name }}
+{{ form.last_name }}
 
-        <!-- Declaration -->
-        <div class="form-row">
-            <div class="declaration-box">
-                {{ form.agree }}
-                <label>
-                    I hereby declare that the information provided above is true,
-                    complete, and correct to the best of my knowledge and belief.
-                    <span style="color:red">*</span>
-                </label>
-            </div>
-            {{ form.agree.errors }}
-        </div>
+</div>
 
-        <button type="submit" class="submit-btn">
-            Submit Application
-        </button>
+{{ form.first_name.errors }}
+{{ form.middle_name.errors }}
+{{ form.last_name.errors }}
 
-    </form>
+</div>
+
+<!-- Course -->
+
+<div class="form-row">
+
+<label>Applying For *</label>
+
+{{ form.program }}
+
+{{ form.program.errors }}
+
+</div>
+
+<!-- DOB -->
+
+<div class="form-row">
+
+<label>Date of Birth *</label>
+
+{{ form.dob }}
+
+{{ form.dob.errors }}
+
+</div>
+
+<!-- Gender -->
+
+<div class="form-row">
+
+<label>Gender *</label>
+
+<div class="gender-group">
+
+{{ form.gender }}
+
+</div>
+
+{{ form.gender.errors }}
+
+</div>
+
+<!-- Father Name -->
+
+<div class="form-row">
+
+<label>Father Name *</label>
+
+<div class="three-col">
+
+{{ form.father_first_name }}
+{{ form.father_middle_name }}
+{{ form.father_last_name }}
+
+</div>
+
+{{ form.father_first_name.errors }}
+{{ form.father_middle_name.errors }}
+{{ form.father_last_name.errors }}
+
+</div>
+
+<!-- Mother Name -->
+
+<div class="form-row">
+
+<label>Mother Name *</label>
+
+<div class="three-col">
+
+{{ form.mother_first_name }}
+{{ form.mother_middle_name }}
+{{ form.mother_last_name }}
+
+</div>
+
+{{ form.mother_first_name.errors }}
+{{ form.mother_middle_name.errors }}
+{{ form.mother_last_name.errors }}
+
+</div>
+
+<!-- Address -->
+
+<div class="form-row">
+
+<label>Current Address *</label>
+
+{{ form.address }}
+
+{{ form.address.errors }}
+
+</div>
+
+<!-- Phone -->
+
+<div class="form-row">
+
+<label>Phone Number *</label>
+
+{{ form.contact_number }}
+
+{{ form.contact_number.errors }}
+
+</div>
+
+<!-- Email -->
+
+<div class="form-row">
+
+<label>Email *</label>
+
+{{ form.email }}
+
+{{ form.email.errors }}
+
+</div>
+
+<!-- Upload Photo -->
+
+<div class="form-row">
+
+<label>Upload Photo *</label>
+
+{{ form.photo }}
+
+{{ form.photo.errors }}
+
+</div>
+
+<!-- Upload Document -->
+
+<div class="form-row">
+
+<label>Upload Document *</label>
+
+{{ form.document }}
+
+{{ form.document.errors }}
+
+</div>
+
+<!-- Declaration -->
+
+<div class="form-row">
+
+<div class="declaration-box">
+
+{{ form.agree }}
+
+<label>
+I hereby declare that the information provided above is true, complete, and correct.
+</label>
+
+</div>
+
+{{ form.agree.errors }}
+
+</div>
+
+<button type="submit" class="submit-btn">
+
+Submit Application
+
+</button>
+
+</form>
+
+<div style="margin-top:30px;text-align:center;border-top:1px solid #eee;padding-top:20px;">
+
+<p style="color:#555;font-size:15px;">
+Already submitted your application?
+</p>
+
+<a href="{% url 'download_application_by_id' %}"
+   style="
+   display:inline-block;
+   padding:12px 20px;
+   background:#2c3e50;
+   color:#fff;
+   border-radius:8px;
+   text-decoration:none;
+   font-weight:600;
+   ">
+   Download Submitted Application
+</a>
+
+</div>
+
 </div>
 
 </body>

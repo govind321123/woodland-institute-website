@@ -2,6 +2,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 from .views import (
     IndexView,
     CoursesView,
@@ -23,6 +24,11 @@ from .views import (
     LeadershipDetailView,
     DynamicPageView,
     DashboardHomeView,
+    DownloadApplicationView,
+    DownloadApplicationByIDView, 
+    ApplicationListView,
+    LaboratoryListView,
+     
 )
 
 urlpatterns = [
@@ -59,7 +65,10 @@ urlpatterns = [
     # =========================
     # GALLERY
     # =========================
-    path('gallery/<slug:slug>/', GalleryView.as_view(), name='gallery'),
+    # path('gallery/<slug:slug>/', GalleryView.as_view(), name='gallery'),
+
+    path('gallery/', GalleryView.as_view(), name='gallery'),
+    path('gallery/<slug:slug>/', GalleryView.as_view(), name='gallery_category'),
 
     # =========================
     # CONTACT
@@ -78,7 +87,24 @@ urlpatterns = [
     # =========================
     path('apply-now/', ApplyNowView.as_view(), name='apply_now'),
     path('admission/', ApplyNowView.as_view(), name='admission'),
-    path('success/', ApplicationSuccessView.as_view(), name='application_success'),
+    # path('success/', ApplicationSuccessView.as_view(), name='application_success'),
+    path(
+    "application-success/<int:id>/",
+    ApplicationSuccessView.as_view(),
+    name="application_success"
+    ),
+
+    path(
+        "download-application/<int:id>/",
+        DownloadApplicationView.as_view(),
+        name="download_application"
+    ),
+
+    path(
+    "download-application/",
+    DownloadApplicationByIDView.as_view(),
+    name="download_application_by_id"
+),
 
     # =========================
     # ADMINISTRATION
@@ -120,11 +146,23 @@ urlpatterns = [
         name='leadership_detail'
     ),
 
+
+    # =========================
+    # CUSTOM DATA VIEW
+    # =========================
+    path('applications/', ApplicationListView.as_view(), name='applications'),
+
+
+    path('facilities/laboratories/', LaboratoryListView.as_view(), name='laboratories'),
+
+
     # ======================================================
     # 🚨 IMPORTANT: KEEP THIS ALWAYS LAST
     # CATCH-ALL DYNAMIC PAGE
     # ======================================================
     path('<slug:slug>/', DynamicPageView.as_view(), name='dynamic_page'),
+
+
 ]
 
 

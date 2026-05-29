@@ -54,11 +54,20 @@
 <body>
 
 <div class="success-box">
-    <h2>🎉 Application Submitted Successfully!</h2>
+    <!--<h2>🎉 Application Submitted Successfully!</h2>
     <p>
         Thank you for applying.  
         Your application has been received and will be reviewed shortly.
-    </p>
+    </p>-->
+    <h2>Application Submitted Successfully</h2>
+
+        <p>Your Application ID:</p>
+
+        <h3>{{ application.application_id }}</h3>
+
+        <a href="{% url 'download_application' application.id %}">
+        Download Application Form
+        </a>
 
     <a href="/">Go to Home</a>
 </div>

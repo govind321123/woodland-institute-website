@@ -4,6 +4,8 @@ import re
 from datetime import date
 
 
+
+
 # ==================================================
 # ADMINISTRATION FORM
 # ==================================================
@@ -30,15 +32,24 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
         fields = [
+
+            # Student
             'first_name',
+            'middle_name',
             'last_name',
+
             'program',
             'dob',
+            'gender',
 
+            # Father
             'father_first_name',
+            'father_middle_name',
             'father_last_name',
 
+            # Mother
             'mother_first_name',
+            'mother_middle_name',
             'mother_last_name',
 
             'address',
@@ -51,6 +62,13 @@ class ApplicationForm(forms.ModelForm):
 
         widgets = {
             'dob': forms.DateInput(attrs={'type': 'date'}),
+
+            'gender': forms.RadioSelect(choices=[
+                ('male', 'Male'),
+                ('female', 'Female'),
+                ('other', 'Others')
+            ]),
+
             'agree': forms.CheckboxInput(),
         }
 
@@ -60,19 +78,36 @@ class ApplicationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # 🔴 REMOVE -------- OPTION
+        self.fields['gender'].choices = [
+                        ('male', 'Male'),
+                        ('female', 'Female'),
+                        ('other', 'Others'),
+                    ]
+
         for field in self.fields.values():
             if not isinstance(field.widget, forms.CheckboxInput):
                 field.widget.attrs.update({'class': 'form-control'})
 
+        # Student
         self.fields['first_name'].widget.attrs.update({'placeholder': 'First Name'})
+        self.fields['middle_name'].widget.attrs.update({'placeholder': 'Middle Name'})
         self.fields['last_name'].widget.attrs.update({'placeholder': 'Last Name'})
 
+        # Father
         self.fields['father_first_name'].widget.attrs.update({'placeholder': 'Father First Name'})
+        self.fields['father_middle_name'].widget.attrs.update({'placeholder': 'Father Middle Name'})
         self.fields['father_last_name'].widget.attrs.update({'placeholder': 'Father Last Name'})
 
+        # Mother
         self.fields['mother_first_name'].widget.attrs.update({'placeholder': 'Mother First Name'})
+        self.fields['mother_middle_name'].widget.attrs.update({'placeholder': 'Mother Middle Name'})
         self.fields['mother_last_name'].widget.attrs.update({'placeholder': 'Mother Last Name'})
 
+        # Program select placeholder
+        self.fields['program'].choices = [('', 'Select')] + list(self.fields['program'].choices)[1:]
+
+        # Phone number
         self.fields['contact_number'].widget.attrs.update({
             'placeholder': '10-digit Mobile Number',
             'maxlength': '10',
@@ -80,7 +115,7 @@ class ApplicationForm(forms.ModelForm):
         })
 
     # --------------------------------------------------
-    # NAME VALIDATION (Professional Version)
+    # NAME VALIDATION
     # --------------------------------------------------
     def _validate_name(self, name, field):
 
@@ -121,9 +156,10 @@ class ApplicationForm(forms.ModelForm):
         return self._validate_name(self.cleaned_data.get('mother_last_name'), "Mother last name")
 
     # --------------------------------------------------
-    # EMAIL VALIDATION + DUPLICATE CHECK
+    # EMAIL VALIDATION
     # --------------------------------------------------
     def clean_email(self):
+
         email = self.cleaned_data.get('email', '').lower()
 
         if Application.objects.filter(email=email).exists():
@@ -134,9 +170,10 @@ class ApplicationForm(forms.ModelForm):
         return email
 
     # --------------------------------------------------
-    # PHONE VALIDATION + DUPLICATE CHECK
+    # PHONE VALIDATION
     # --------------------------------------------------
     def clean_contact_number(self):
+
         phone = self.cleaned_data.get('contact_number')
 
         if not phone or not phone.isdigit() or len(phone) != 10:
@@ -155,8 +192,10 @@ class ApplicationForm(forms.ModelForm):
     # DOB VALIDATION
     # --------------------------------------------------
     def clean_dob(self):
+
         dob = self.cleaned_data.get('dob')
         today = date.today()
+
         age = (today - dob).days // 365
 
         if dob >= today or age < 17:
@@ -167,9 +206,10 @@ class ApplicationForm(forms.ModelForm):
         return dob
 
     # --------------------------------------------------
-    # PHOTO SIZE VALIDATION
+    # PHOTO VALIDATION
     # --------------------------------------------------
     def clean_photo(self):
+
         photo = self.cleaned_data.get('photo')
 
         if photo and photo.size > 6 * 1024 * 1024:
@@ -180,12 +220,14 @@ class ApplicationForm(forms.ModelForm):
         return photo
 
     # --------------------------------------------------
-    # DOCUMENT VALIDATION (PDF ONLY)
+    # DOCUMENT VALIDATION
     # --------------------------------------------------
     def clean_document(self):
+
         document = self.cleaned_data.get('document')
 
         if document:
+
             if not document.name.lower().endswith('.pdf'):
                 raise forms.ValidationError("Only PDF files are allowed.")
 
@@ -195,9 +237,10 @@ class ApplicationForm(forms.ModelForm):
         return document
 
     # --------------------------------------------------
-    # AGREEMENT CHECK
+    # DECLARATION CHECK
     # --------------------------------------------------
     def clean_agree(self):
+
         if not self.cleaned_data.get('agree'):
             raise forms.ValidationError(
                 "You must accept the declaration"

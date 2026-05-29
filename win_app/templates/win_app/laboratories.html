@@ -1,0 +1,167 @@
+<style>
+.lab-wrapper {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.lab-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.lab-main-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #0d6e63;
+    margin-bottom: 70px;
+}
+
+.lab-item {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 90px;
+}
+
+.lab-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.lab-image {
+    flex: 1;
+}
+
+.lab-image img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.lab-content {
+    flex: 1;
+}
+
+.lab-content h3 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #145c54;
+}
+
+.lab-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+}
+
+@media (max-width: 992px) {
+    .lab-item {
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .lab-image img {
+        height: 300px;
+    }
+}
+</style>
+
+<div class="lab-wrapper">
+<div class="lab-container">
+
+<h2 class="lab-main-title">Laboratories</h2>
+
+<!-- Nursing -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.0.image.url }}" alt="Nursing Foundation Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Nursing Foundation Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+<!-- Anatomy -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.1.image.url }}" alt="Anatomy Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Anatomy & Physiology Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+<!-- Computer -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.2.image.url }}" alt="Computer Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Computer Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+<!-- Advanced -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.3.image.url }}" alt="Advanced Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Advanced Nursing Skill Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+<!-- Community -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.4.image.url }}" alt="Community Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Community Health Nursing Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+<!-- Pediatric -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.5.image.url }}" alt="Pediatric Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Pediatric Nursing Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+<!-- OB/GYN -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.6.image.url }}" alt="OBG Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Obstetrics & Gynecology Nursing Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+<!-- Nutrition -->
+<div class="lab-item">
+    <div class="lab-image">
+        <img src="{{ labs.7.image.url }}" alt="Nutrition Lab">
+    </div>
+    <div class="lab-content">
+        <h3>Nutrition Lab</h3>
+        <p>...</p>
+    </div>
+</div>
+
+</div>
+</div>

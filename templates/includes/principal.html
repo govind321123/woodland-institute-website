@@ -1,0 +1,119 @@
+{% if director %}
+<section class="director-area py-5" style="background:#f4f6fa;">
+    <div class="container-fluid px-5">
+
+        <!-- HEADING -->
+        <div class="mb-4">
+            <span class="text-warning fw-bold">MESSAGE</span>
+            <h2 class="fw-bold">From The Director</h2>
+        </div>
+
+        <div class="row align-items-start">
+
+            <!-- LEFT CONTENT -->
+            <div class="col-lg-6">
+
+                <h4 class="fw-semibold">{{ director.name }}</h4>
+                <p class="text-muted">{{ director.designation }}</p>
+
+                <!-- Highlighted Intro Paragraph -->
+                <div class="director-intro">
+                    Our foremost challenge in health care today is the shortage of qualified nurses in both clinical practice and nursing education. 
+                    To overcome this challenge Woodland Institute of Nursing had started with a GNM program for students desirous of developing skills and competency in nursing. 
+                    In a span of 4 years the Basic B.Sc. and Post Basic B.Sc Nursing programs were opened in the newly constructed building at the Laitkor Campus. 
+                    Over a period of 6 years, we have about 300 students who have graduated from the Institute in various programs and working in different areas of Health Organization.
+                </div>
+
+                <!-- Remaining Content From Admin -->
+                <div id="directorMore" class="director-more">
+                    {{ director.message|safe }}
+                </div>
+
+                <button id="readBtn"
+                        class="director-btn mt-3">
+                    Read Full Message
+                </button>
+
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <div class="col-lg-6 text-center">
+                {% if director.photo %}
+                    <img src="{{ director.photo.url }}"
+                         alt="{{ director.name }}"
+                         class="img-fluid rounded shadow"
+                         style="max-height:520px; object-fit:cover;">
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- STYLE -->
+<style>
+/* Highlighted Intro */
+.director-intro {
+    background: #ffffff;
+    padding: 22px 25px;
+    border-left: 5px solid #f4b400;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    font-size: 15px;
+    line-height: 1.9;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Hidden content */
+.director-more {
+    display: none;
+    margin-top: 15px;
+    line-height: 1.9;
+    color: #555;
+}
+
+/* Button */
+.director-btn {
+    background: #f4b400;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: #000;
+    cursor: pointer;
+}
+
+.director-btn:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+}
+</style>
+
+<!-- SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const moreContent = document.getElementById("directorMore");
+    const btn = document.getElementById("readBtn");
+
+    btn.addEventListener("click", function () {
+
+        const isHidden = window.getComputedStyle(moreContent).display === "none";
+
+        if (isHidden) {
+            moreContent.style.display = "block";
+            btn.innerHTML = "Show Less";
+        } else {
+            moreContent.style.display = "none";
+            btn.innerHTML = "Read Full Message";
+        }
+
+    });
+
+});
+</script>
+
+{% endif %}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size:12px;
+    color:#333;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    border-bottom:3px solid #1e3a8a;
+    padding-bottom:15px;
+    margin-bottom:20px;
+}
+
+.logo{
+    width:110px;
+    margin-bottom:5px;
+}
+
+.institute-name{
+    font-size:26px;
+    font-weight:bold;
+    color:#000;
+}
+
+.subtitle{
+    font-size:13px;
+}
+
+/* APPLICATION ID */
+
+.app-id{
+    position:absolute;
+    right:40px;
+    top:40px;
+    text-align:right;
+}
+
+/* MAIN BOX */
+
+.box{
+    border:1px solid #bbb;
+    padding:25px;
+}
+
+/* SECTION TITLE */
+
+.section-title{
+    background:#eef3ff;
+    padding:9px 10px;
+    font-weight:bold;
+    border-left:5px solid #1e3a8a;
+    margin-top:18px;
+    font-size:13px;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+td{
+    padding:7px;
+    vertical-align:top;
+    border-bottom:1px solid #e2e2e2;
+}
+
+.label{
+    width:220px;
+    font-weight:bold;
+    color:#000;
+}
+
+/* PHOTO */
+
+.photo-box{
+    width:120px;
+    height:140px;
+    border:2px solid #888;
+    padding:4px;
+    text-align:center;
+    background:#fafafa;
+}
+
+.photo-box img{
+    width:120px;
+    height:140px;
+    object-fit:cover;
+}
+
+/* GENERATED DATE */
+
+.date{
+    margin-top:20px;
+    padding-top:10px;
+    border-top:1px solid #ddd;
+    text-align:right;
+    font-size:11px;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:35px;
+    font-size:10px;
+    text-align:center;
+    color:#888;
+    border-top:1px solid #ddd;
+    padding-top:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+{% if organization.logo %}
+<img src="{{ organization.logo.path }}" class="logo">
+{% endif %}
+
+<div class="institute-name">
+{{ organization.heads }}
+</div>
+
+<div class="subtitle">
+{{ organization.address_name }}
+</div>
+
+<div class="subtitle">
+Admission Application Form
+</div>
+
+</div>
+
+<div class="app-id">
+<b>Application ID</b><br>
+{{ application.application_id }}
+</div>
+
+
+<!-- MAIN BOX -->
+
+<div class="box">
+
+<table>
+
+<tr>
+
+<td width="75%">
+
+<!-- PERSONAL INFORMATION -->
+
+<div class="section-title">
+Personal Information
+</div>
+
+<table>
+
+<tr>
+<td class="label">Full Name</td>
+<td>
+{{ application.first_name }}
+{% if application.middle_name %}
+{{ application.middle_name }}
+{% endif %}
+{{ application.last_name }}
+</td>
+</tr>
+
+<tr>
+<td class="label">Course Applied</td>
+<td>{{ application.program }}</td>
+</tr>
+
+<tr>
+<td class="label">Date of Birth</td>
+<td>{{ application.dob }}</td>
+</tr>
+
+<tr>
+<td class="label">Gender</td>
+<td>{{ application.gender }}</td>
+</tr>
+
+</table>
+
+</td>
+
+<td align="right">
+
+<!-- PHOTO -->
+
+<div class="photo-box">
+
+{% if application.photo %}
+<img src="{{ application.photo.path }}">
+{% else %}
+Photo
+{% endif %}
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<!-- PARENT DETAILS -->
+
+<div class="section-title">
+Parent Details
+</div>
+
+<table>
+
+<tr>
+<td class="label">Father Name</td>
+<td>
+{{ application.father_first_name }}
+{% if application.father_middle_name %}
+{{ application.father_middle_name }}
+{% endif %}
+{{ application.father_last_name }}
+</td>
+</tr>
+
+<tr>
+<td class="label">Mother Name</td>
+<td>
+{{ application.mother_first_name }}
+{% if application.mother_middle_name %}
+{{ application.mother_middle_name }}
+{% endif %}
+{{ application.mother_last_name }}
+</td>
+</tr>
+
+</table>
+
+
+<!-- CONTACT INFORMATION -->
+
+<div class="section-title">
+Contact Information
+</div>
+
+<table>
+
+<tr>
+<td class="label">Email</td>
+<td>{{ application.email }}</td>
+</tr>
+
+<tr>
+<td class="label">Phone</td>
+<td>{{ application.contact_number }}</td>
+</tr>
+
+<tr>
+<td class="label">Address</td>
+<td>{{ application.address }}</td>
+</tr>
+
+</table>
+
+
+<!-- GENERATED DATE -->
+
+<div class="date">
+
+<b>Application Generated On:</b>
+{{ generated_date|date:"d M Y" }}
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+Generated automatically by {{ organization.heads }} Admission System
+
+</div>
+
+</body>
+</html>

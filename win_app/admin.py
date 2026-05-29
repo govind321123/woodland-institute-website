@@ -26,6 +26,9 @@ from .models import (
     ContactMessage,
     # FooterSection, FooterLink, SitePage
     CourseSyllabus,
+    AdmissionSettings,
+    Laboratory,
+    
 
 
 
@@ -69,6 +72,9 @@ admin.site.register(GalleryCategory)
 admin.site.register(GalleryItem)
 admin.site.register(Breadcrumb)
 admin.site.register(WhyChooseUs)
+# 
+
+admin.site.register(Laboratory)
 # admin.site.register(DirectorMessage)
 @admin.register(ContactPage)
 class ContactPageAdmin(admin.ModelAdmin):
@@ -138,3 +144,5 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_editable = ("is_read",)
 
     readonly_fields = ("name", "email", "subject", "message", "created_at")
+
+admin.site.register(AdmissionSettings)

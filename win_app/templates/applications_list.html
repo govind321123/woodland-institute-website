@@ -55,6 +55,16 @@
                 {% if app.document %}
                     <a href="{{ app.document.url }}" target="_blank">View</a>
                 {% endif %}
+
+                <br>
+
+               {% if announcement.pdf_file %}
+                    <a href="{{ announcement.pdf_file.url }}"
+                    class="btn btn-primary mt-3"
+                    target="_blank">
+                        📄 Download PDF
+                    </a>
+                {% endif %}
             </td>
             <td>{{ app.submitted_at }}</td>
         </tr>

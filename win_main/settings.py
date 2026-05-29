@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'win_app.context_processors.menus',
                 'win_app.context_processors.footer_sections',
+                'win_app.context_processors.admission_status',
             ],
         },
     },
@@ -90,27 +91,30 @@ WSGI_APPLICATION = 'win_main.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'woodland_institute',
-#         'USER': 'postgres',
-#         'PASSWORD': 'govindacharya',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+# --------------------------------------------------
 # DATABASE (MYSQL)
+# --------------------------------------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='127.0.0.1'),
-        'PORT': config('DB_PORT', default='3306'),
+        'NAME': 'django_db',
+        'USER': 'root',
+        'PASSWORD': 'Shillong@itanagar',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
+# DATABASE (MYSQL)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST', default='127.0.0.1'),
+#         'PORT': config('DB_PORT', default='3306'),
+#     }
+# }
 
 # --------------------------------------------------
 # PASSWORD VALIDATION
@@ -152,12 +156,30 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# # --------------------------------------------------
+# # EMAIL CONFIG (SAFE DEFAULTS ✅)
+# # --------------------------------------------------
+# EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+# EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+# DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
+
+
+
+
 # --------------------------------------------------
-# EMAIL CONFIG (SAFE DEFAULTS ✅)
+# EMAIL CONFIG (GMAIL SMTP)
 # --------------------------------------------------
-EMAIL_HOST = config('EMAIL_HOST', default='localhost')
-EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'govindacharya51331@gmail.com'
+EMAIL_HOST_PASSWORD = 'nszfhbfqntbusizg'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

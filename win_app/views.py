@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -11,11 +12,15 @@ from .forms import ApplicationForm
 from django.urls import reverse_lazy
 from django.db.models import Case, When, Value, IntegerField
 from django.shortcuts import redirect
-
-
-
-# changes
-# from .models import Announcement
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from .models import GalleryItem
+from django.core.mail import EmailMessage
+from io import BytesIO
+from django.utils import timezone
+from .models import AdmissionSettings
+from .models import Laboratory
 
 
 
@@ -49,10 +54,18 @@ class IndexView(View):
         organization = OrganizationModel.objects.first()
         director = DirectorMessage.objects.filter(is_active=True).first()
 
-        # FIXED ORDER
-        courses = CoursesModel.objects.order_by('heads')
+        courses = CoursesModel.objects.annotate(
+            custom_order=Case(
+                When(heads="GNM Nursing", then=Value(1)),
+                When(heads="BSc Nursing", then=Value(2)),
+                When(heads="PBBSc Nursing", then=Value(3)),
+                default=Value(4),
+                output_field=IntegerField(),
+            )
+        ).order_by("custom_order")
 
         leaders = LeadershipMessage.objects.all()
+        # popup = PopupMessage.objects.filter(is_active=True).first()
 
         current_year = datetime.now().year
         year_of_establishment = None
@@ -66,33 +79,9 @@ class IndexView(View):
             "director": director,
             "courses": courses,
             "leaders": leaders,
+
+          
         })
-
-# class IndexView(View):
-#     def get(self, request):
-#         organization = OrganizationModel.objects.first()
-#         director = DirectorMessage.objects.filter(is_active=True).first()
-#         # courses = CoursesModel.objects.all()[:3]
-#         courses = CoursesModel.objects.all()
-
-#         leaders = LeadershipMessage.objects.all()  # 👈 ADD THIS
-
-#         current_year = datetime.now().year
-#         year_of_establishment = None
-
-#         if organization and organization.year_of_estabishment:
-#             year_of_establishment = current_year - organization.year_of_estabishment
-
-#         return render(request, "index.html", {
-#             "organization": organization,
-#             "yearofestablishment": year_of_establishment,
-#             "director": director,
-#             "courses": courses,
-#             "leaders": leaders,   # 👈 ADD THIS
-#         })
-
-
-
 
 
 
@@ -137,6 +126,8 @@ class CoursesView(View):
             "section_heading": course.heads,
             "first_part": first_part,
             "second_part": second_part,
+
+
         })
 
 
@@ -171,18 +162,22 @@ class FacilitiesView(View):
 # GALLERY
 # ==================================================
 class GalleryView(View):
-    def get(self, request, slug):
-        category = get_object_or_404(GalleryCategory, slug=slug)
-        items = category.items.all()
+    def get(self, request, slug=None):
+
         categories = GalleryCategory.objects.all()
 
-        breadcrumb_image = (
-            category.breadcrumb_image.url
-            if category.breadcrumb_image
-            else None
-        )
+        if slug:
+            category = get_object_or_404(GalleryCategory, slug=slug)
+            items = category.items.all()
+        else:
+            category = None
+            items = GalleryItem.objects.all()
 
-        if not breadcrumb_image:
+        breadcrumb_image = None
+
+        if category and category.breadcrumb_image:
+            breadcrumb_image = category.breadcrumb_image.url
+        else:
             section_bc = Breadcrumb.objects.filter(section="gallery").first()
             if section_bc and section_bc.image:
                 breadcrumb_image = section_bc.image.url
@@ -192,7 +187,7 @@ class GalleryView(View):
             "gallery_items": items,
             "gallery_categories": categories,
             "breadcrumb_image": breadcrumb_image,
-            "section_heading": category.name,
+            "section_heading": category.name if category else "Gallery",
         })
 
 
@@ -392,22 +387,144 @@ class EventDetailView(View):
 # ==================================================
 # APPLY NOW
 # ==================================================
+
+    
+# ==============================
+# ✅ CHECK ADMISSION STATUS
+# ==============================
+def is_admission_open():
+    setting = AdmissionSettings.objects.filter(is_active=True).first()
+
+    if not setting:
+        return False
+
+    today = timezone.now().date()
+
+    return setting.start_date <= today <= setting.end_date
+
+
+# ==============================
+# ✅ APPLY NOW VIEW
+# ==============================
 class ApplyNowView(FormView):
+
     template_name = "apply_now.html"
     form_class = ApplicationForm
-    success_url = reverse_lazy('application_success')
 
+    # 🔒 BLOCK ACCESS IF CLOSED
+    def dispatch(self, request, *args, **kwargs):
+
+        if not is_admission_open():
+            messages.error(request, "Admissions are currently closed.")
+            return redirect("home")
+
+        return super().dispatch(request, *args, **kwargs)
+
+    # ✅ HANDLE FORM SUBMIT
     def form_valid(self, form):
-        form.save()
-        messages.success(self.request, "Application submitted successfully")
-        return super().form_valid(form)
 
-class ApplicationSuccessView(View):
-    def get(self, request):
-        return render(request, "application_success.html", {
-            "section_heading": "Application Submitted",
+        application = form.save()
+
+        # ==============================
+        # ✅ GENERATE PDF
+        # ==============================
+        organization = OrganizationModel.objects.first()
+
+        template = get_template("application_pdf.html")
+
+        html = template.render({
+            "application": application,
+            "organization": organization,
+            "generated_date": datetime.now()
         })
 
+        pdf_buffer = BytesIO()
+        pisa.CreatePDF(html, dest=pdf_buffer)
+
+        # ==============================
+        # ✅ SEND EMAIL WITH PDF
+        # ==============================
+        subject = "Application Submitted Successfully"
+
+        message = f"""
+Dear {application.first_name},
+
+Your application has been successfully submitted.
+
+Application ID: {application.application_id}
+
+Please find your application form attached.
+
+Thank you.
+"""
+
+        email = EmailMessage(
+            subject,
+            message,
+            to=[application.email]
+        )
+
+        email.attach(
+            f"application_{application.application_id}.pdf",
+            pdf_buffer.getvalue(),
+            "application/pdf"
+        )
+
+        email.send(fail_silently=False)
+
+        # ==============================
+        # ✅ SUCCESS MESSAGE
+        # ==============================
+        messages.success(
+            self.request,
+            "Application submitted successfully. Check your email."
+        )
+
+        return redirect(
+            "application_success",
+            id=application.id
+        )
+
+class ApplicationSuccessView(View):
+
+    def get(self, request, id):
+
+        application = get_object_or_404(Application, id=id)
+
+        return render(
+            request,
+            "application_success.html",
+            {
+                "application": application,
+                "section_heading": "Application Submitted",
+            }
+        )
+
+
+class DownloadApplicationView(View):
+
+    def get(self, request, id):
+
+        application = get_object_or_404(Application, id=id)
+        organization = OrganizationModel.objects.first()
+
+        template = get_template("application_pdf.html")
+
+        html = template.render({
+            "application": application,
+            "organization": organization,
+            "generated_date": datetime.now()
+        })
+
+        response = HttpResponse(content_type="application/pdf")
+
+        response["Content-Disposition"] = (
+            f'attachment; filename="application_{application.application_id}.pdf"'
+        )
+
+        pisa.CreatePDF(html, dest=response)
+
+        return response
 
 # ==================================================
 # TRAINING
@@ -486,53 +603,7 @@ class AnnouncementListView(ListView):
             context["section_heading"] = "Announcements"
 
         return context
-# class AnnouncementListView(ListView):
-#     model = Announcement
-#     template_name = "announcements/announcement_list.html"
-#     context_object_name = "announcements"
 
-#     def get_queryset(self):
-#         self.category = get_object_or_404(
-#             AnnouncementCategory,
-#             slug=self.kwargs["slug"],
-#             is_active=True
-#         )
-
-#         return Announcement.objects.filter(
-#             is_active=True,
-#             category=self.category
-#         )
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-
-#         # 🔥 ADD CATEGORY TO CONTEXT
-#         context["category"] = self.category
-
-#         bc = Breadcrumb.objects.filter(section="announcements").first()
-#         context["breadcrumb_image"] = bc.image.url if bc and bc.image else None
-
-#         return context
-
-
-# class AnnouncementDetailView(DetailView):
-#     model = Announcement
-#     template_name = "announcements/announcement_detail.html"
-#     context_object_name = "announcement"
-#     slug_field = "slug"
-#     slug_url_kwarg = "slug"
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-
-#         section_bc = Breadcrumb.objects.filter(section="announcements").first()
-#         context["breadcrumb_image"] = (
-#             section_bc.image.url if section_bc and section_bc.image else None
-#         )
-#         context["section_heading"] = self.object.title
-
-#         return context
-    
 
 
 class LeadershipListView(ListView):
@@ -552,10 +623,7 @@ class LeadershipDetailView(DetailView):
         return context
 
 
-# class LeadershipDetailView(DetailView):
-#     model = LeadershipMessage
-#     template_name = 'leadership_detail.html'
-#     context_object_name = 'leader'
+
 
 
 
@@ -567,7 +635,7 @@ class DynamicPageView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['hide_home_sections'] = True   # 🔥 THIS IS THE MAGIC
+        context['hide_home_sections'] = True   
         return context
     
 
@@ -638,3 +706,56 @@ class CourseSyllabusView(View):
                 "section_heading": f"{course.heads} - Program Structure",
             }
         )
+    
+
+class DownloadApplicationByIDView(View):
+
+    def get(self, request):
+        return render(request, "download_application.html")
+
+    def post(self, request):
+
+        application_id = request.POST.get("application_id")
+        dob = request.POST.get("dob")
+
+        try:
+            application = Application.objects.get(
+                application_id=application_id,
+                dob=dob
+            )
+
+            return redirect("download_application", id=application.id)
+
+        except Application.DoesNotExist:
+            messages.error(request, "Application not found")
+            return redirect("download_application_by_id")
+        
+
+
+
+# security
+
+
+class ApplicationListView(LoginRequiredMixin, UserPassesTestMixin, View):
+
+    login_url = '/secretadmin/login/'   # redirect if not logged in
+
+    def test_func(self):
+        return self.request.user.is_staff   # only staff allowed
+
+    def handle_no_permission(self):
+        if not self.request.user.is_authenticated:
+            return redirect('/secretadmin/login/')
+        return redirect('home')
+
+    def get(self, request):
+        applications = Application.objects.all().order_by('-id')
+
+        return render(request, "applications_list.html", {
+            "applications": applications
+        })
+    
+class LaboratoryListView(ListView):
+    model = Laboratory
+    template_name = 'laboratories.html'
+    context_object_name = 'labs'

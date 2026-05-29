@@ -45,7 +45,7 @@ Administration
 
 /* ===== Designation ===== */
 .admin-designation{
-    color:#0d6efd;
+     color:#333;
     font-weight:600;
     font-size:17px;
 }
@@ -72,8 +72,30 @@ Administration
 
 /* ===== Back Button ===== */
 .back-btn{
-    padding:10px 22px;
-    font-weight:500;
+    background:#116E63;
+    color:white;
+    border:none;
+    padding:12px 28px;
+    border-radius:30px;
+    transition:all 0.3s ease;
+}
+
+.back-btn:hover{
+    background:#0c544b;
+    transform:translateY(-2px);
+}
+
+.admin-info-box{
+    background:#f7f7f7;
+    padding:20px 25px;
+    border-radius:12px;
+    margin-bottom:20px;
+    border-left:4px solid #116E63;
+}
+
+.admin-info-box p{
+    margin-bottom:8px;
+    font-size:16px;
 }
 
 </style>
@@ -94,21 +116,63 @@ Administration
         <!-- DETAILS -->
         <div class="col-lg-8">
 
+            <!-- Name -->
             <h2 class="admin-name">{{ administration.name }}</h2>
 
+            <!-- Designation -->
+            <!--{% if administration.designation %}
             <p>
                 <span class="admin-label">Designation:</span>
-                <span class="admin-designation">{{ administration.designation.name }}</span>
+                <span class="admin-designation">
+                    {{ administration.designation.name }}
+                </span>
             </p>
+            {% endif %}-->
 
+            <div class="admin-info-box">
+
+                <p>
+                    <span class="admin-label">Designation:</span>
+                    <span class="admin-designation">
+                        {{ administration.designation.name }}
+                    </span>
+                </p>
+
+                <p>
+                    <span class="admin-label">Qualification:</span>
+                    {{ administration.qualification }}
+                </p>
+
+            </div>
+
+            <!-- Qualification -->
+            <!--{% if administration.qualification %}
+            <p>
+                <span class="admin-label">Qualification:</span>
+                {{ administration.qualification }}
+            </p>
+            {% endif %}-->
+
+            <!-- Department (NOT for Principal) -->
+            {% if administration.department and administration.designation.name != "Principal" %}
             <p>
                 <span class="admin-label">Department:</span>
-                <span class="admin-department">{{ administration.department.name }}</span>
+                <span class="admin-department">
+                    {{ administration.department.name }}
+                </span>
             </p>
+            {% endif %}
 
+            <!-- Details -->
             {% if administration.details %}
             <div class="mt-4">
-                <h5 class="profile-title">Profile & Qualifications</h5>
+                <h5 class="profile-title">
+                    {% if administration.designation.name == "Principal" %}
+                    Message
+                    {% else %}
+                    Profile
+                    {% endif %}
+                </h5>
                 <hr>
                 <div class="profile-content">
                     {{ administration.details|safe }}
@@ -116,6 +180,7 @@ Administration
             </div>
             {% endif %}
 
+            <!-- Back Button -->
             <div class="mt-4">
                 <a href="{% url 'administration' %}" class="btn btn-primary back-btn">
                     ← Back to Faculty
